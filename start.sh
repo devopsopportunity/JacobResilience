@@ -18,7 +18,7 @@ resize -s 40 106
 clear
 
 # Run the .NET application
-dotnet run
+dotnet run JacobResilience.csproj
 
 # Restore normal cursor after application exits
 tput cnorm

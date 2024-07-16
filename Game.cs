@@ -26,6 +26,11 @@ namespace Modules
         private string coin1EmojiChar;
         private string coin2EmojiChar;
         private string coin3EmojiChar;
+        private string poachersEmojiChar;
+        private string staminaEmojiChar;
+        private string livesEmojiChar;
+        private string level1EmojiChar;
+        private string level2EmojiChar;
 
         /// <summary>
         /// Initializes a new instance of the Game class.
@@ -47,6 +52,12 @@ namespace Modules
             coin1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_1")?.Character ?? " ";
             coin2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_2")?.Character ?? " ";
             coin3EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_3")?.Character ?? " ";
+            coin3EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_3")?.Character ?? " ";
+            poachersEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Poachers")?.Character ?? " ";
+            staminaEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Shield")?.Character ?? " ";
+            livesEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Health")?.Character ?? " ";
+            level1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Level#1")?.Character ?? " ";
+            level2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Level#2")?.Character ?? " ";
         }
 
         // Public properties to get emoji characters
@@ -63,5 +74,10 @@ namespace Modules
         public string Coin1EmojiChar => coin1EmojiChar;
         public string Coin2EmojiChar => coin2EmojiChar;
         public string Coin3EmojiChar => coin3EmojiChar;
+        public string PoachersEmojiChar => poachersEmojiChar;
+        public string StaminaEmojiChar => staminaEmojiChar;
+        public string LivesEmojiChar => livesEmojiChar;
+        public string Level1EmojiChar => level1EmojiChar;
+        public string Level2EmojiChar => level2EmojiChar;
     }
 }

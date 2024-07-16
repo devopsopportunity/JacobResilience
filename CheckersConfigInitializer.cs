@@ -14,7 +14,7 @@ namespace JacobResilienceGame
     {
         public static CheckersConfig[] InitializeCheckersConfigs(Game game)
         {
-            CheckersConfig[] checkersConfigs = new CheckersConfig[3];
+            CheckersConfig[] checkersConfigs = new CheckersConfig[4];
 
             checkersConfigs[0] = new CheckersConfig()
             {
@@ -41,6 +41,15 @@ namespace JacobResilienceGame
                 MinHeight = GameConfig.SCREEN_HEIGHT / 2,
                 MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
                 Character = game.Coin3EmojiChar
+            };
+
+            checkersConfigs[3] = new CheckersConfig()
+            {
+                MinEntities = 1,
+                MaxEntities = 2,
+                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                Character = game.PoachersEmojiChar
             };
 
             return checkersConfigs;

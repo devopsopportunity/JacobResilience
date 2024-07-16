@@ -60,7 +60,7 @@ namespace Modules
         /// <param name="fileName">The name of the sound file to play.</param>
         private void Play(string fileName)
         {
-            RunProcess("play", fileName + ".wav");
+            RunProcess("play", GameConfig.FOLDER_WAV + fileName + ".wav");
         }
 
         /// <summary>

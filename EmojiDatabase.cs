@@ -2,22 +2,23 @@
  * EmojiDatabase.cs
  * @ Edoardo Sabatini & ChatGPT 3.5
  * -------------------------------------------
- * Questo file definisce le classi Emoji e EmojiDatabase per gestire un database di emoji
+ * This file defines the Emoji and EmojiDatabase classes to manage an emoji database.
  * -------------------------------------------
  * @hacktlon July 15, 2024
  */
+using System;
 using System.Collections.Generic;
 
 namespace EmojiGame
 {
     public class Emoji
     {
-        public int Id { get; set; }           // Identificatore unico dell'emoji
-        public string Name { get; set; }      // Nome dell'emoji
-        public string Character { get; set; } // Carattere Unicode dell'emoji
-        public string Description { get; set; } // Descrizione dell'emoji
+        public int Id { get; set; }           // Unique identifier of the emoji
+        public string Name { get; set; }      // Name of the emoji
+        public string Character { get; set; } // Unicode character of the emoji
+        public string Description { get; set; } // Emoji description
 
-        // Costruttore per inizializzare un'istanza di Emoji
+        // Constructor to initialize an instance of Emoji
         public Emoji(int id, string name, string character, string description)
         {
             Id = id;
@@ -29,9 +30,9 @@ namespace EmojiGame
 
     public class EmojiDatabase
     {
-        public List<Emoji> Emojis { get; private set; } // Lista di tutte le emoji nel database
+        public List<Emoji> Emojis { get; private set; } // List of all emojis in the database
 
-        // Costruttore per inizializzare il database con le emoji
+        // Constructor to initialize the database with emojis
         public EmojiDatabase()
         {
             Emojis = new List<Emoji>
@@ -65,7 +66,7 @@ namespace EmojiGame
                 new Emoji(26, "Objective", "🎯", "Represents objectives or targets to achieve."),
                 new Emoji(27, "Magic", "💫", "Represents magical effects in the game."),
                 new Emoji(28, "Shield", "🛡️", "Represents defensive capabilities."),
-                new Emoji(29, "Velocity", "🏃‍♂️", "Represents speed or agility."),
+                new Emoji(29, "Velocity", "🚀", "Represents speed or agility."),
                 new Emoji(30, "Health", "❤️", "Represents health or vitality."),
                 new Emoji(31, "Star", "🌟", "Represents bonus points or achievements."),
                 new Emoji(32, "Weapons", "⚔️", "Represents weapons or combat abilities."),
@@ -82,6 +83,21 @@ namespace EmojiGame
                 new Emoji(43, "Coin_2", "💰", "Represents currency or coins used in the game."),
                 new Emoji(44, "Coin_3", "🪙", "Represents currency or coins used in the game.")
             };
+        }
+
+        /// <summary>
+        /// Prints the legend of emojis with their descriptions.
+        /// </summary>
+        public static void PrintEmojiLegend()
+        {
+            EmojiDatabase db = new EmojiDatabase();
+            Console.WriteLine("Emoji Legend:");
+            foreach (var emoji in db.Emojis)
+            {
+                Console.WriteLine($"{emoji.Character} - {emoji.Description}");
+            }
+            Console.WriteLine("\nPress any key to come back to the welcome screen...");
+            Console.ReadKey();
         }
     }
 }

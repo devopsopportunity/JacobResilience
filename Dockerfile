@@ -33,4 +33,4 @@ COPY --from=build-env /App/out .
 COPY --from=build-env /usr/bin/play /usr/bin/play
 COPY --from=build-env /usr/bin/sox /usr/bin/sox
 
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+ENTRYPOINT ["dotnet", "JacobResilience.dll"]

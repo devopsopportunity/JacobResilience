@@ -16,6 +16,11 @@ namespace Modules
         /// <summary>
         /// Width of the game screen.
         /// </summary>
+        public const string FOLDER_WAV = "wav/";
+
+        /// <summary>
+        /// Width of the game screen.
+        /// </summary>
         public const int SCREEN_WIDTH = 100;
 
         /// <summary>
@@ -42,5 +47,27 @@ namespace Modules
         /// Pause control value to control game speed.
         /// </summary>
         public const int PAUSE_CONTROL = 50;
+
+        /// <summary>
+        /// Initial resilience of the player.
+        /// </summary>
+        public const int MAX_RESILIENCE = 30;
+
+        public const int INIT_RESILIENCE = 3;
+        /// <summary>
+        /// Initial stamina of the player.
+        /// </summary>
+        public const int MAX_STAMINA = 30;
+        public const int INIT_STAMINA = 3;
+
+        /// <summary>
+        /// Initial lives of the player.
+        /// </summary>
+        public const int MAX_LIVES = 30;
+
+        public const int INIT_LIVES = 3;
+
+        public const int STEP_LEVELS = 3;
+
     }
 }

@@ -29,8 +29,10 @@ namespace Modules
             Console.SetCursorPosition(0, screenHeight);
             Console.WriteLine("\n\nCHOOSE FROM MENU                               ");
             Console.WriteLine(line);
-            Console.WriteLine("H - Hide the menu and return to the game"); options++;
-            Console.WriteLine("Q - Exit the game"); options++;
+            Console.WriteLine("H - Hide the menu and return to the game           "); options++;
+            Console.WriteLine("Q - Exit the game                                  "); options++;
+            Console.WriteLine("                                                                                                    ");
+            Console.WriteLine("                                                                                                    ");
             Console.WriteLine(line);
             ManageMenuInput(screenHeight, screenWidth, showMenu, returnToGameAction, exitGameAction);
         }
