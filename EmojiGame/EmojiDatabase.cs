@@ -45,7 +45,7 @@ namespace EmojiGame
                 new Emoji(8, "Mountain", "⛰️", "Represents mountains or cliffs along the path."),
                 new Emoji(9, "Time", "🌅", "Represents the time of day in the game."),
                 new Emoji(10, "Finish", "🥇", "Represents the finish line or final goal."),
-                new Emoji(11, "Snake", "🐍", "Represents venomous snakes."),
+                new Emoji(11, "Snake1", "🐍", "Represents venomous snakes."),
                 new Emoji(12, "Poachers", "🪤", "Represents poachers' traps in the river."),
                 new Emoji(13, "Level#0", "0️⃣", "Represents the introductory level."),
                 new Emoji(14, "Level#1", "1️⃣", "Represents a level."),
@@ -53,7 +53,7 @@ namespace EmojiGame
                 new Emoji(16, "Level#3", "3️⃣", "Represents a level."),
                 new Emoji(17, "Level#4", "4️⃣", "Represents a level."),
                 new Emoji(18, "Level#5", "5️⃣", "Represents a level."),
-                new Emoji(19, "Snake", "🪱", "Symbolizes a snake in the desert."),
+                new Emoji(19, "Snake2", "🪱", "Symbolizes a snake in the desert."),
                 new Emoji(20, "Fire", "🔥", "Represents fiery energy in the game."),
                 new Emoji(21, "TreasureMap", "🗺️", "Represents a treasure map or secret document."),
                 new Emoji(22, "MagicPotion", "🧪", "Represents magical potions in the game."),
@@ -78,7 +78,9 @@ namespace EmojiGame
                 new Emoji(41, "Energy", "🔋", "Represents energy."),
                 new Emoji(42, "Resilience", "💪", "Represents resilience."),
                 new Emoji(43, "Coin_2", "💰", "Represents currency or coins used in the game."),
-                new Emoji(44, "Coin_3", "🪙", "Represents currency or coins used in the game.")
+                new Emoji(44, "Coin_3", "🪙", "Represents currency or coins used in the game."),
+                new Emoji(45, "Meat_1", "🥩", "Represents meat as a source of energy in the game."),
+                new Emoji(46, "Meat_2", "🍖", "Represents another type of meat for energy in the game.")
             };
         }
 

@@ -12,8 +12,6 @@
 using EmojiGame; // Assuming Emoji and EmojiDatabase classes are in this namespace
 using Modules;   // Namespace containing GameMenu, LeaderBoard, PlayerScore, SoundPlayer, Utility
 using Config;    // CheckersConfig.cs, CheckersConfigInitializer, Game, GameConfig
-using JacobResilienceGame.Checkers;
-using JacobResilienceGame.Animals;
 
 namespace JacobResilienceGame
 {
@@ -25,12 +23,7 @@ namespace JacobResilienceGame
         // Game components
         private GameMenu gameMenu;
         public Game game;
-        private FactoryCheckerAbstract checkCoins1;
-        private FactoryCheckerAbstract checkCoins2;
-        private FactoryCheckerAbstract checkCoins3;
-        private FactoryCheckerAbstract checkPoachers;
-        private DelegateAnimalChecker checkHippopotamus;
-        private DelegateAnimalChecker checkCrocodile;
+        private GameComponents gameComponents;
 
         // Input handling
         private readonly Queue<ConsoleKeyInfo> inputQueue = new Queue<ConsoleKeyInfo>();
@@ -66,12 +59,7 @@ namespace JacobResilienceGame
             game = new Game();
             screen = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
             screenBackup = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
-            checkCoins1 = new CheckCoins1(game, this);
-            checkCoins2 = new CheckCoins2(game, this);
-            checkCoins3 = new CheckCoins3(game, this);
-            checkPoachers = new CheckPoachers(game, this);
-            checkHippopotamus = new CheckHippopotamus(game, this);
-            checkCrocodile = new CheckCrocodile(game, this);
+            gameComponents = new GameComponents(game, this);
 
             leaderBoard.InitializeLeaderboard();
             InitializeGame();
@@ -348,12 +336,7 @@ namespace JacobResilienceGame
                 {
                     if (CanMoveTo(playerPosX, y))
                     {
-                        await checkCoins1.CheckForItems(y, playerPosX);
-                        await checkCoins2.CheckForItems(y, playerPosX);
-                        await checkCoins3.CheckForItems(y, playerPosX);
-                        await checkPoachers.CheckForItems(y, playerPosX);
-                        await checkHippopotamus.CheckForItems(y, playerPosX);
-                        await checkCrocodile.CheckForItems(y, playerPosX);
+                        await gameComponents.InvokeAll(y, playerPosX);
                     }
                     else
                     {
@@ -373,12 +356,7 @@ namespace JacobResilienceGame
                 if (CanMoveTo(playerPosX, newY))
                 {
                     playerPosY = newY;
-                    await checkCoins1.CheckForItems(playerPosY, playerPosX);
-                    await checkCoins2.CheckForItems(playerPosY, playerPosX);
-                    await checkCoins3.CheckForItems(playerPosY, playerPosX);
-                    await checkPoachers.CheckForItems(playerPosY, playerPosX);
-                    await checkHippopotamus.CheckForItems(playerPosY, playerPosX);
-                    await checkCrocodile.CheckForItems(playerPosY, playerPosX);
+                    await gameComponents.InvokeAll(playerPosY, playerPosX);
                 }
             }
 
@@ -410,12 +388,7 @@ namespace JacobResilienceGame
             {
                 for (int dx = -1; dx <= 1; dx++)
                 {
-                    await checkCoins1.CheckForItems(playerPosY + dy, playerPosX + dx);
-                    await checkCoins2.CheckForItems(playerPosY + dy, playerPosX + dx);
-                    await checkCoins3.CheckForItems(playerPosY + dy, playerPosX + dx);
-                    await checkPoachers.CheckForItems(playerPosY + dy, playerPosX + dx);
-                    await checkHippopotamus.CheckForItems(playerPosY + dy, playerPosX + dx);
-                    await checkCrocodile.CheckForItems(playerPosY + dy, playerPosX + dx);
+                    await gameComponents.InvokeAll(playerPosY + dy, playerPosX + dx);
                 }
             }
         }

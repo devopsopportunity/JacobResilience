@@ -35,6 +35,15 @@ namespace Config
         private string crocodileEmojiChar;
         private string waveEmojiChar;
         private string dropletEmojiChar;
+        private string appleEmojiChar;
+        private string meat1EmojiChar;
+        private string meat2EmojiChar;
+        private string waterEmojiChar;
+        private string trapEmojiChar;
+        private string fireEmojiChar;
+        private string dangerEmojiChar;
+        private string snake1EmojiChar;
+        private string snake2EmojiChar;
 
         /// <summary>
         /// Initializes a new instance of the Game class.
@@ -65,6 +74,15 @@ namespace Config
             crocodileEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Crocodile")?.Character ?? " ";
             waveEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Wave")?.Character ?? " ";
             dropletEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Droplet")?.Character ?? " ";
+            appleEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Apple")?.Character ?? " ";
+            meat1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Meat_1")?.Character ?? " ";
+            meat2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Meat_2")?.Character ?? " ";
+            waterEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Water")?.Character ?? " ";
+            trapEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Trap")?.Character ?? " ";
+            fireEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Fire")?.Character ?? " ";
+            dangerEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Danger")?.Character ?? " ";
+            snake1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake1")?.Character ?? " ";
+            snake2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake2")?.Character ?? " ";            
         }
 
         // Public properties to get emoji characters
@@ -90,5 +108,14 @@ namespace Config
         public string CrocodileEmojiChar => crocodileEmojiChar;
         public string WaveEmojiChar => waveEmojiChar;
         public string DropletEmojiChar => dropletEmojiChar;
+        public string AppleEmojiChar => appleEmojiChar;
+        public string Meat1EmojiChar => meat1EmojiChar;
+        public string Meat2EmojiChar => meat2EmojiChar;
+        public string WaterEmojiChar => waterEmojiChar;
+        public string TrapEmojiChar => trapEmojiChar;
+        public string FireEmojiChar => fireEmojiChar;
+        public string DangerEmojiChar => dangerEmojiChar;
+        public string Snake1EmojiChar => snake1EmojiChar;
+        public string Snake2EmojiChar => snake2EmojiChar;
     }
 }
