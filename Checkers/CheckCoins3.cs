@@ -8,9 +8,7 @@
  * -------------------------------------------------------------
  * @hacktlon July 15, 2024
  */
-using System;
-using System.Threading.Tasks;
-using Modules;
+using Config;
 
 namespace JacobResilienceGame.Checkers
 {

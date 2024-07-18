@@ -8,9 +8,8 @@
  * -------------------------------------------------------------
  * @hacktlon July 15, 2024
  */
-using System;
-using System.Threading.Tasks;
-using Modules; // Assuming Emoji and EmojiDatabase classes are in this namespace
+using Modules;
+using Config;
 
 namespace JacobResilienceGame.Checkers
 {
