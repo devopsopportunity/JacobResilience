@@ -10,23 +10,27 @@
  */
 
 using EmojiGame; // Assuming Emoji and EmojiDatabase classes are in this namespace
-using Modules;   // Namespace containing GameMenu, SoundPlayer class
+using Modules;   // Namespace containing GameMenu, LeaderBoard, PlayerScore, SoundPlayer, Utility
+using Config;    // CheckersConfig.cs, CheckersConfigInitializer, Game, GameConfig
 using JacobResilienceGame.Checkers;
+using JacobResilienceGame.Animals;
 
 namespace JacobResilienceGame
 {
     public class Program
     {
-        // Static array for the leaderboard of the top 10 scores.
-        private static PlayerScore[] leaderboard = new PlayerScore[10];
+        private LeaderBoard leaderBoard;
+        private Utility utility;
 
         // Game components
         private GameMenu gameMenu;
-        private Game game;
+        public Game game;
         private FactoryCheckerAbstract checkCoins1;
         private FactoryCheckerAbstract checkCoins2;
         private FactoryCheckerAbstract checkCoins3;
         private FactoryCheckerAbstract checkPoachers;
+        private DelegateAnimalChecker checkHippopotamus;
+        private DelegateAnimalChecker checkCrocodile;
 
         // Input handling
         private readonly Queue<ConsoleKeyInfo> inputQueue = new Queue<ConsoleKeyInfo>();
@@ -41,7 +45,7 @@ namespace JacobResilienceGame
         private int playerPosX;             // X position of the player
         private int playerPosY;             // Y position of the player
         private int jumpVelocity;           // Player's jump velocity
-        private int score;                  // Player's score
+        public int score;                  // Player's score
         public int credit;                  // Player's credits
         public int credit2;                 // Player's credits2
         public int resilience;              // Player's resilience
@@ -54,6 +58,9 @@ namespace JacobResilienceGame
 
         public Program()
         {
+            leaderBoard = new LeaderBoard(this);
+            utility = new Utility(this);
+
             // Initialize game components
             gameMenu = new GameMenu(); 
             game = new Game();
@@ -63,7 +70,10 @@ namespace JacobResilienceGame
             checkCoins2 = new CheckCoins2(game, this);
             checkCoins3 = new CheckCoins3(game, this);
             checkPoachers = new CheckPoachers(game, this);
-            InitializeLeaderboard();
+            checkHippopotamus = new CheckHippopotamus(game, this);
+            checkCrocodile = new CheckCrocodile(game, this);
+
+            leaderBoard.InitializeLeaderboard();
             InitializeGame();
         }
 
@@ -85,46 +95,6 @@ namespace JacobResilienceGame
             InitializeWorld(); // Initialize the game world
             checkersConfigs = CheckersConfigInitializer.InitializeCheckersConfigs(game); // Initialize the CheckersConfig array
             Console.Clear();
-        }
-
-        // Static array for the leaderboard of the top 10 scores
-        private static void InitializeLeaderboard()
-        {
-            for (int i = 0; i < leaderboard.Length; i++)
-            {
-                leaderboard[i] = new PlayerScore("AAA", 0, 0, 0); // Default score
-            }
-        }
-
-        // Method to update the leaderboard with a new score
-        private static void UpdateLeaderboard(PlayerScore newScore)
-        {
-            // Update only if the new score is higher than any of the top 10
-            for (int i = 0; i < leaderboard.Length; i++)
-            {
-                if (newScore.Score > leaderboard[i].Score)
-                {
-                    // Insert the new score at the i-th position
-                    Array.Copy(leaderboard, i, leaderboard, i + 1, leaderboard.Length - i - 1);
-                    leaderboard[i] = newScore;
-                    break;
-                }
-            }
-        }
-
-        // Method to display the leaderboard
-        private static void DisplayLeaderboard()
-        {
-            Console.WriteLine("🦁 Leaderboard 🏆");
-            Console.WriteLine(new string('-', 20)); // Dashed line
-
-            for (int i = 0; i < leaderboard.Length; i++)
-            {
-                Console.Write($"🦁 {i + 1}: ");
-                leaderboard[i].DisplayScore(); // Uses the DisplayScore method of the PlayerScore class
-            }
-            
-            Console.WriteLine(new string('-', 20)); // Dashed line after the leaderboard
         }
 
         /// <summary>
@@ -165,10 +135,22 @@ namespace JacobResilienceGame
                         await UpdateWorld();                    
                         DrawScreen();
 
+                        // Check for resilience condition
+                        if (resilience < 0) {
+                            lives--;
+                            resilience = GameConfig.INIT_RESILIENCE;
+                        }
+                        // Check for stamina condition
+                        if (stamina < 0) {
+                            lives--;
+                            stamina = GameConfig.INIT_STAMINA;
+                        }
                         // Check for game over condition
                         if (lives < 0)
                         {
-                            youLose(); // Call the method to display death screen
+                            leaderBoard.youLose(); // Call the method to display death screen
+                            // Set restart to true after valid initials are entered
+                            restart = true;
                         }
                     }
                     else
@@ -285,14 +267,7 @@ namespace JacobResilienceGame
             // Draw the game screen
             Console.SetCursorPosition(0, 0);
 
-            string currentLevel = "";
-            switch(levels) {
-                case 0: currentLevel = game.LevelEmojiChar; break;
-                case 1: currentLevel = game.Level1EmojiChar; break;
-                case 2: currentLevel = game.Level2EmojiChar; break;
-                default: currentLevel = game.Level2EmojiChar; break;
-            }
-            Console.WriteLine("LEVEL " + currentLevel);
+            utility.PrintLevelTitle();
 
             for (int y = 0; y < GameConfig.SCREEN_HEIGHT; y++)
             {
@@ -310,7 +285,20 @@ namespace JacobResilienceGame
                 }
                 Console.WriteLine();
             }
-            for (int x = 0; x < GameConfig.SCREEN_WIDTH / 2; x++) Console.Write(game.VegetationEmojiChar);
+            
+            /*
+            * Code snippet handling the ground representation based on the level:
+            * Here we determine the symbol representing the ground or surface.
+            */
+            string groundSymbol = levels switch {
+                0 => game.VegetationEmojiChar,  // Represents Savannah vegetation
+                1 => game.WaveEmojiChar, // Wave emoji representing water in the Kazinga Channel
+                2 => game.DropletEmojiChar, // Droplet emoji representing water droplet in the Kazinga Channel
+                _ => " " // Default representation
+            };
+
+            for (int x = 0; x < GameConfig.SCREEN_WIDTH / 2; x++) Console.Write(groundSymbol);
+
             Console.WriteLine("\nPress 'M' = Show Menu, 'R' = Restart Game");
             Console.WriteLine($"Score: {score}");
             Console.WriteLine("CREDIT: " + game.Coin1EmojiChar + " " + $"{credit}");
@@ -364,6 +352,8 @@ namespace JacobResilienceGame
                         await checkCoins2.CheckForItems(y, playerPosX);
                         await checkCoins3.CheckForItems(y, playerPosX);
                         await checkPoachers.CheckForItems(y, playerPosX);
+                        await checkHippopotamus.CheckForItems(y, playerPosX);
+                        await checkCrocodile.CheckForItems(y, playerPosX);
                     }
                     else
                     {
@@ -387,6 +377,8 @@ namespace JacobResilienceGame
                     await checkCoins2.CheckForItems(playerPosY, playerPosX);
                     await checkCoins3.CheckForItems(playerPosY, playerPosX);
                     await checkPoachers.CheckForItems(playerPosY, playerPosX);
+                    await checkHippopotamus.CheckForItems(playerPosY, playerPosX);
+                    await checkCrocodile.CheckForItems(playerPosY, playerPosX);
                 }
             }
 
@@ -422,6 +414,8 @@ namespace JacobResilienceGame
                     await checkCoins2.CheckForItems(playerPosY + dy, playerPosX + dx);
                     await checkCoins3.CheckForItems(playerPosY + dy, playerPosX + dx);
                     await checkPoachers.CheckForItems(playerPosY + dy, playerPosX + dx);
+                    await checkHippopotamus.CheckForItems(playerPosY + dy, playerPosX + dx);
+                    await checkCrocodile.CheckForItems(playerPosY + dy, playerPosX + dx);
                 }
             }
         }
@@ -531,7 +525,7 @@ namespace JacobResilienceGame
                     else if (key.Key == ConsoleKey.P)
                     {
                         Console.Clear();
-                        DisplayLeaderboard(); // Show leaderboard
+                        leaderBoard.DisplayLeaderboard(); // Show leaderboard
                         Console.WriteLine("\nPress any key to return to the welcome screen...");
                         Console.ReadKey(true);
                         ShowWelcomeScreen(); // Return to welcome screen
@@ -564,87 +558,5 @@ namespace JacobResilienceGame
             }
         }
 
-        // Updated youLose method to handle leaderboard
-        private void youLose()
-        {
-            SoundPlayer soundPlayer = new SoundPlayer();
-            soundPlayer.PlayAsync("game_over");
-
-            Console.Clear();
-
-            // Display "You Lose!" screen
-            Console.WriteLine("💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀");
-            Console.WriteLine("💀                                💀");
-            Console.WriteLine("💀            YOU LOSE!            💀");
-            Console.WriteLine($"💀          Score: {score.ToString().PadLeft(6)}         💀");
-            Console.WriteLine($"💀          Credit: {(credit + (credit2 * 100)).ToString().PadLeft(6)}         💀");
-            Console.WriteLine("💀                                💀");
-            Console.WriteLine("💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀");
-
-            string initials = string.Empty;
-            bool isValidInitials = false;
-
-            // Loop until valid initials are entered
-            while (!isValidInitials)
-            {
-                Console.WriteLine("\nEnter your initials for high score (3 letters): ");
-
-                // Read input character by character
-                initials = ReadInitials();
-
-                // Check if initials are valid
-                if (initials.Length == 3)
-                {
-                    isValidInitials = true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid initials. Please enter exactly 3 letters.");
-                }
-            }
-
-            // After valid initials are entered, update the leaderboard
-            PlayerScore currentPlayer = new PlayerScore(initials.ToUpper(), score, credit + (credit2 * 100), levels);
-            UpdateLeaderboard(currentPlayer);
-
-            // Display leaderboard
-            DisplayLeaderboard();
-
-            // After valid initials are entered, express gratitude and invite to restart
-            Console.WriteLine($"\n🙏 Thank you, {initials}, for playing! Your score: {score} 🎮");
-
-            // Set restart to true after valid initials are entered
-            restart = true;
-
-            // After valid initials are entered, restart the game
-            Console.WriteLine("\nPress any key to restart...");
-            Console.ReadKey(true);
-        }
-
-        private string ReadInitials()
-        {
-            string initials = string.Empty;
-            int initialsCount = 0;
-
-            while (initialsCount < 3)
-            {
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-
-                // Check if the key pressed is a letter
-                if (char.IsLetter(keyInfo.KeyChar))
-                {
-                    initials += keyInfo.KeyChar;
-                    initialsCount++;
-                    Console.Write(keyInfo.KeyChar);
-                }
-                // Check if the user pressed Enter to submit initials
-                else if (keyInfo.Key == ConsoleKey.Enter)
-                {
-                    break;
-                }
-            }
-
-            return initials;
-        }        
     } // End of Program class    
 }
