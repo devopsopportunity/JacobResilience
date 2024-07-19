@@ -90,6 +90,60 @@ namespace Modules
             Console.ReadKey(true);
         }
 
+        // Method to display "You Win!" screen
+        public void youWin()
+        {
+            SoundPlayer soundPlayer = new SoundPlayer();
+            soundPlayer.PlayAsync("win"); // Play a win sound
+
+            Console.Clear();
+
+            // Display "You Win!" screen
+            Console.WriteLine("🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉");
+            Console.WriteLine("🎉                                🎉");
+            Console.WriteLine("🎉            YOU WIN!            🎉");
+            Console.WriteLine($"🎉          Score: {program.score.ToString().PadLeft(6)}         🎉");
+            Console.WriteLine($"🎉          Credit: {(program.credit + (program.credit2 * 100)).ToString().PadLeft(6)}         🎉");
+            Console.WriteLine("🎉                                🎉");
+            Console.WriteLine("🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉");
+
+            string initials = string.Empty;
+            bool isValidInitials = false;
+
+            // Loop until valid initials are entered
+            while (!isValidInitials)
+            {
+                Console.WriteLine("\nEnter your initials for high score (3 letters): ");
+
+                // Read input character by character
+                initials = ReadInitials();
+
+                // Check if initials are valid
+                if (initials.Length == 3)
+                {
+                    isValidInitials = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid initials. Please enter exactly 3 letters.");
+                }
+            }
+
+            // After valid initials are entered, update the leaderboard
+            PlayerScore currentPlayer = new PlayerScore(initials.ToUpper(), program.score, program.credit + (program.credit2 * 100), program.levels);
+            UpdateLeaderboard(currentPlayer);
+
+            // Display leaderboard
+            DisplayLeaderboard();
+
+            // After valid initials are entered, express gratitude and invite to restart
+            Console.WriteLine($"\n🙏 Thank you, {initials}, for playing! Your score: {program.score} 🎮");
+
+            // After valid initials are entered, restart the game
+            Console.WriteLine("\nPress any key to restart...");
+            Console.ReadKey(true);
+        }
+
         private string ReadInitials()
         {
             string initials = string.Empty;

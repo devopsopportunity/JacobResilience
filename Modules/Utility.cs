@@ -58,12 +58,17 @@ namespace Modules
         // Function to print the level title and description in formatted blocks
         public void PrintLevelTitle()
         {
+            var gameLevel = program.levels<program.gameLevelInitializer.GameLevels.Count()
+                            ? program.gameLevelInitializer.GameLevels[program.levels] 
+                            : program.gameLevelInitializer.GameLevels[0];
+            // You can now use `gameLevel` as needed
+
             string currentLevel = program.levels switch
             {
                 0 => $"{program.game.LevelEmojiChar}  ",
                 1 => $"{program.game.Level1EmojiChar}  ",
                 2 => $"{program.game.Level2EmojiChar}  ",
-                _ => $"{program.game.Level2EmojiChar}  "
+                _ => $"{program.game.LevelEmojiChar}  "
             };
 
             string levelText = $"LEVEL {currentLevel}";
@@ -76,18 +81,18 @@ namespace Modules
             Console.Write(levelText);
             Console.SetCursorPosition(leftPadding, 0);
 
-            // Positioning the description
-            string descLevel = program.levels switch
-            {
-                0 => "You are now in the Savannah! You'll face poachers' traps that attempt to reduce your health.",
-                1 => "Now you are swimming through the Kazinga Channel for almost a mile and encountering hippos along your path! They reduce your resilience by one point.",
-                2 => "A more challenging level as you navigate through another part of the Kazinga Channel, now infested with crocodiles that decrease your stamina level!",
-                _ => "Game schema not yet set..."
-            };
+            // Max chars of the description
+            int maxChars = GameLevelInitializer.MAX_DESCRIPTION_LENGTH / 2;
 
-            int maxChars=80;
-            // Split the description into lines of 50 characters each, avoiding breaking words
-            string[] lines = WrapText(descLevel, maxChars);
+            // Split the description into lines of maxChars characters each, avoiding breaking words
+            string[] lines = WrapText(gameLevel.Description, maxChars);
+
+            // Add an empty line if the description has less than 2 lines
+            if (lines.Length < 2)
+            {
+                Array.Resize(ref lines, 2);
+                lines[1] = ""; // Add an empty line
+            }
 
             // Calculate left padding for description lines
             int descriptionLeftPadding = (screenWidth - maxChars) / 2;
@@ -95,14 +100,18 @@ namespace Modules
             // Output the description centered
             for (int i = 0; i < lines.Length; i++)
             {
+
+                if (lines[i].Length > maxChars)
+                {
+                    lines[i] = lines[i].Substring(0, maxChars); // Truncate to maxChars
+                }
+                
                 Console.SetCursorPosition(descriptionLeftPadding, i); // Start from the second line for description
-                Console.WriteLine(lines[i].PadRight(maxChars)); // Pad to 50 characters
+                Console.WriteLine(lines[i].PadRight(maxChars));
             }
 
             // Set the cursor position to the next line after the description
             Console.SetCursorPosition(0, lines.Length);
         }
-
-
     }
 }

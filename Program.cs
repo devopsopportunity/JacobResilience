@@ -24,7 +24,7 @@ namespace JacobResilienceGame
         private GameMenu gameMenu;
         public Game game;
         private GameComponents gameComponents;
-        private GameLevelInitializer gameLevelInitializer;
+        public GameLevelInitializer gameLevelInitializer;
 
         // Input handling
         private readonly Queue<ConsoleKeyInfo> inputQueue = new Queue<ConsoleKeyInfo>();
@@ -39,7 +39,7 @@ namespace JacobResilienceGame
         private int playerPosX;             // X position of the player
         private int playerPosY;             // Y position of the player
         private int jumpVelocity;           // Player's jump velocity
-        public int score;                  // Player's score
+        public int score;                   // Player's score
         public int levelScore;              // Player's levelScore
         public int credit;                  // Player's credits
         public int credit2;                 // Player's credits2
@@ -62,6 +62,7 @@ namespace JacobResilienceGame
             string filePath = "JacobResilienceGameLevel.txt";
             gameLevelInitializer = new GameLevelInitializer(filePath, game);
             // gameLevelInitializer.Verify();
+            // Console.WriteLine("levels="+gameLevelInitializer.GameLevels.Count());
             // Environment.Exit(1);
             leaderBoard.InitializeLeaderboard();
             InitializeGame();
@@ -372,8 +373,7 @@ namespace JacobResilienceGame
                 score++;
                 levelScore++;
 
-                if (levels < gameLevelInitializer.GameLevels.Count)
-                {
+                if (levels < gameLevelInitializer.GameLevels.Count-1) {
                     var gameLevel = gameLevelInitializer.GameLevels[levels];
                     // You can now use `gameLevel` as needed
 
@@ -398,25 +398,10 @@ namespace JacobResilienceGame
                             levels++;
                             levelScore = 0;
                     }
+                } else {
+                    leaderBoard.youWin();
+                    restart = true;
                 }
-
-                // if(score%GameConfig.STEP_LEVELS==0) levels++;
-                
-                /*                
-                if (checkersConfigs != null)
-                {
-                    for (int i = 0; i < checkersConfigs.Length; i++)
-                    {
-                        SetEntities(
-                            checkersConfigs[i].MinEntities,
-                            checkersConfigs[i].MaxEntities,
-                            checkersConfigs[i].Character,
-                            checkersConfigs[i].MinHeight,
-                            checkersConfigs[i].MaxHeight
-                        );
-                    }
-                } 
-                */
             }
 
             // Additional coin checks around the player
@@ -462,10 +447,7 @@ namespace JacobResilienceGame
                 int entityY = random.Next(minHeight, maxHeight);
 
                 screen[entityY, entityX] = emojiChar;
-                // Console.WriteLine(screen[entityY, entityX] + " " + entityY + " " + entityX);
-                // Console.WriteLine($"SetEntities called with minEntities: {minEntities}, maxEntities: {maxEntities}, emojiChar: {emojiChar}, minHeight: {minHeight}, maxHeight: {maxHeight}");            
             }
-            // Debug line to print the input parameters            
         }
 
         /// <summary>

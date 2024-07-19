@@ -12,6 +12,8 @@ namespace Config
 {
     public class GameLevelInitializer
     {
+        public static readonly int MAX_DESCRIPTION_LENGTH = 160;
+
         public List<GameLevel> GameLevels { get; private set; }
         private Dictionary<string, string> emojiMap;
         private Game game;
@@ -77,7 +79,21 @@ namespace Config
             {
                 if (lines[i].StartsWith("LEVEL_DESCRIPTION:"))
                 {
-                    GameLevel currentLevel = new GameLevel(lines[i].Substring("LEVEL_DESCRIPTION:".Length).Trim());
+                    string description = lines[i].Substring("LEVEL_DESCRIPTION:".Length).Trim();
+                    if (description.Length > MAX_DESCRIPTION_LENGTH)
+                    {
+                        description = description.Substring(0, MAX_DESCRIPTION_LENGTH);
+                    }
+                    else
+                    {
+                        if(description=="") description="Empty Level";
+                        description = description.PadRight(MAX_DESCRIPTION_LENGTH);
+                    }
+
+                    Console.WriteLine(description + " " + description.Length);
+
+                    GameLevel currentLevel = new GameLevel(description);
+
                     i++;
                     if (lines[i].StartsWith("TOTAL_SCORE_DURATION:"))
                     {
