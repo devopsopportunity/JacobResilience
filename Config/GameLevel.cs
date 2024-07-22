@@ -17,6 +17,8 @@ namespace Config
 
         public int TotalScoreDuration { get; set; } // Total score duration for the level
 
+        public int PavementLevel  { get; set; } // Pavement for the level
+
         // Default constructor
         public GameLevel(string description) {
             this.Description = description;

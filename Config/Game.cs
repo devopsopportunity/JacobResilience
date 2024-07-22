@@ -12,15 +12,18 @@ namespace Config
 {
     public class Game
     {
+        // Array to store level emojis where index corresponds to the level number
+        private string[] levelEmojis;
+
+        // Array to store pavement Level where index corresponds to the level number
+        private string[] pavementLevel;
+
         // Emoji characters with fallback values (using null-coalescing)
         private string playerEmojiChar;
-        private string vegetationEmojiChar;
-        private string wallEmojiChar;
         private string cloudEmojiChar;
         private string cloudsunEmojiChar;
         private string rainbowEmojiChar;
         private string mountainEmojiChar;
-        private string levelEmojiChar;
         private string energyEmojiChar;
         private string resilienceEmojiChar;
         private string coin1EmojiChar;
@@ -29,21 +32,17 @@ namespace Config
         private string poachersEmojiChar;
         private string staminaEmojiChar;
         private string livesEmojiChar;
-        private string level1EmojiChar;
-        private string level2EmojiChar;
         private string hippopotamusEmojiChar;
         private string crocodileEmojiChar;
-        private string waveEmojiChar;
-        private string dropletEmojiChar;
         private string appleEmojiChar;
         private string meat1EmojiChar;
         private string meat2EmojiChar;
-        private string waterEmojiChar;
         private string trapEmojiChar;
         private string fireEmojiChar;
         private string dangerEmojiChar;
         private string snake1EmojiChar;
-        private string snake2EmojiChar;
+        private string snake2EmojiChar;      
+        private string watermelonEmojiChar;
 
         /// <summary>
         /// Initializes a new instance of the Game class.
@@ -52,14 +51,18 @@ namespace Config
         {
             EmojiDatabase emojiDatabase = new EmojiDatabase(); // Emoji database containing all emojis used in the game
 
+            // Initialize the level emojis array
+            levelEmojis = new string[10];
+            for (int i = 0; i <= 9; i++)
+            {
+                levelEmojis[i] = emojiDatabase.Emojis.Find(e => e.Name == $"Level#{i}")?.Character ?? " ";
+            }
+
             playerEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Jacob")?.Character ?? " ";
-            vegetationEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Vegetation")?.Character ?? " ";
-            wallEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Wall")?.Character ?? " ";
             cloudEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Cloud")?.Character ?? " ";
             cloudsunEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Cloudsun")?.Character ?? " ";
             rainbowEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Rainbow")?.Character ?? " ";
             mountainEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Mountain")?.Character ?? " ";
-            levelEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Level#0")?.Character ?? " ";
             energyEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Energy")?.Character ?? " ";
             resilienceEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Resilience")?.Character ?? " ";
             coin1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_1")?.Character ?? " ";
@@ -68,32 +71,47 @@ namespace Config
             poachersEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Poachers")?.Character ?? " ";
             staminaEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Shield")?.Character ?? " ";
             livesEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Health")?.Character ?? " ";
-            level1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Level#1")?.Character ?? " ";
-            level2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Level#2")?.Character ?? " ";
             hippopotamusEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Hippopotamus")?.Character ?? " ";
             crocodileEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Crocodile")?.Character ?? " ";
-            waveEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Wave")?.Character ?? " ";
-            dropletEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Droplet")?.Character ?? " ";
             appleEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Apple")?.Character ?? " ";
             meat1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Meat_1")?.Character ?? " ";
             meat2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Meat_2")?.Character ?? " ";
-            waterEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Water")?.Character ?? " ";
             trapEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Trap")?.Character ?? " ";
             fireEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Fire")?.Character ?? " ";
             dangerEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Danger")?.Character ?? " ";
             snake1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake1")?.Character ?? " ";
-            snake2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake2")?.Character ?? " ";            
+            snake2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake2")?.Character ?? " ";
+            watermelonEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Watermelon")?.Character ?? " ";
+
+            pavementLevel = new string[10];
+            buildPavementLevel(emojiDatabase);
+        }
+
+        private void buildPavementLevel(EmojiDatabase emojiDatabase)
+        {
+            // Initialize the pavement Level array
+            pavementLevel[0] = emojiDatabase.Emojis.Find(e => e.Name == "Vegetation")?.Character ?? " ";
+            pavementLevel[1] = emojiDatabase.Emojis.Find(e => e.Name == "Wave")?.Character ?? " ";
+            pavementLevel[2] = emojiDatabase.Emojis.Find(e => e.Name == "Droplet")?.Character ?? " ";
+            pavementLevel[3] = emojiDatabase.Emojis.Find(e => e.Name == "Wall")?.Character ?? " ";
+            pavementLevel[4] = emojiDatabase.Emojis.Find(e => e.Name == "Water")?.Character ?? " ";
+
+            pavementLevel[5] = " " + emojiDatabase.Emojis.Find(e => e.Name == "Channel")?.Character ?? " ";
+            pavementLevel[6] = " " + emojiDatabase.Emojis.Find(e => e.Name == "Island")?.Character ?? " ";
+
+            pavementLevel[7] = emojiDatabase.Emojis.Find(e => e.Name == "Vegetation_2")?.Character ?? " ";            
+            pavementLevel[8] = emojiDatabase.Emojis.Find(e => e.Name == "Mushroom")?.Character ?? " ";            
+            pavementLevel[9] = emojiDatabase.Emojis.Find(e => e.Name == "Vegetation_3")?.Character ?? " ";
         }
 
         // Public properties to get emoji characters
+        public string[] LevelEmojis => levelEmojis;
+        public string[] PavementLevel => pavementLevel;
         public string PlayerEmojiChar => playerEmojiChar;
-        public string VegetationEmojiChar => vegetationEmojiChar;
-        public string WallEmojiChar => wallEmojiChar;
         public string CloudEmojiChar => cloudEmojiChar;
         public string CloudsunEmojiChar => cloudsunEmojiChar;
         public string RainbowEmojiChar => rainbowEmojiChar;
         public string MountainEmojiChar => mountainEmojiChar;
-        public string LevelEmojiChar => levelEmojiChar;
         public string EnergyEmojiChar => energyEmojiChar;
         public string ResilienceEmojiChar => resilienceEmojiChar;
         public string Coin1EmojiChar => coin1EmojiChar;
@@ -102,20 +120,16 @@ namespace Config
         public string PoachersEmojiChar => poachersEmojiChar;
         public string StaminaEmojiChar => staminaEmojiChar;
         public string LivesEmojiChar => livesEmojiChar;
-        public string Level1EmojiChar => level1EmojiChar;
-        public string Level2EmojiChar => level2EmojiChar;
         public string HippopotamusEmojiChar => hippopotamusEmojiChar;
         public string CrocodileEmojiChar => crocodileEmojiChar;
-        public string WaveEmojiChar => waveEmojiChar;
-        public string DropletEmojiChar => dropletEmojiChar;
         public string AppleEmojiChar => appleEmojiChar;
         public string Meat1EmojiChar => meat1EmojiChar;
         public string Meat2EmojiChar => meat2EmojiChar;
-        public string WaterEmojiChar => waterEmojiChar;
         public string TrapEmojiChar => trapEmojiChar;
         public string FireEmojiChar => fireEmojiChar;
         public string DangerEmojiChar => dangerEmojiChar;
         public string Snake1EmojiChar => snake1EmojiChar;
         public string Snake2EmojiChar => snake2EmojiChar;
+        public string WatermelonEmojiChar => watermelonEmojiChar;
     }
 }

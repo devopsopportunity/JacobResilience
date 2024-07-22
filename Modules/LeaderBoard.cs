@@ -8,6 +8,9 @@
  * -------------------------------------------------------------
  * @hacktlon July 15, 2024
  */
+using System.Security.Cryptography;
+using System.Text;
+using Config;
 using JacobResilienceGame;
 
 namespace Modules
@@ -17,17 +20,22 @@ namespace Modules
         private Program program;
 
         // Static array for the leaderboard of the top 10 scores.
-        private  PlayerScore[] leaderboard = new PlayerScore[10];
+        private PlayerScore[] leaderboard = new PlayerScore[10];
+
+        // Encryption key and IV
+        private readonly byte[] encryptionKey = Encoding.UTF8.GetBytes("A1B2C3D4E5F60708"); // 16 bytes key for AES-128
+        private readonly byte[] encryptionIV = Encoding.UTF8.GetBytes("1A2B3C4D5E6F7089"); // 16 bytes IV for AES
 
         // Constructor accepting a Program object
         public LeaderBoard(Program program)
         {
             this.program = program;
+            InitializeLeaderboard();
+            ReadFromFile();
+            LoadPlayerStatus();
         }
 
-        // Add more leaderboard methods here
-
-        // Static array for the leaderboard of the top 10 scores
+        // Initialize leaderboard with default values
         public void InitializeLeaderboard()
         {
             for (int i = 0; i < leaderboard.Length; i++)
@@ -81,6 +89,10 @@ namespace Modules
 
             // Display leaderboard
             DisplayLeaderboard();
+
+            // Save player status
+            PlayerStatus playerStatus = new PlayerStatus(program.score, program.levelScore, program.credit, program.credit2, program.levels);
+            SavePlayerStatus(playerStatus);
 
             // After valid initials are entered, express gratitude and invite to restart
             Console.WriteLine($"\n🙏 Thank you, {initials}, for playing! Your score: {program.score} 🎮");
@@ -201,5 +213,131 @@ namespace Modules
             Console.WriteLine(new string('-', 20)); // Dashed line after the leaderboard
         }
 
-    }
-}
+        // Method to read leaderboard from file
+        public void ReadFromFile()
+        {
+            if (File.Exists(GameConfig.LEADER_BOARD_FILE))
+            {
+                string encryptedData = File.ReadAllText(GameConfig.LEADER_BOARD_FILE);
+                string decryptedData = Decrypt(encryptedData);
+
+                string[] lines = decryptedData.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                for (int i = 0; i < lines.Length && i < leaderboard.Length; i++)
+                {
+                    string[] parts = lines[i].Split(',');
+                    if (parts.Length == 5)
+                    {
+                        leaderboard[i] = new PlayerScore(
+                            parts[0],
+                            int.Parse(parts[1]),
+                            int.Parse(parts[2]),
+                            int.Parse(parts[3]),
+                            DateTime.Parse(parts[4])
+                        );
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("File not found. Initializing default leaderboard.");
+                InitializeLeaderboard();
+                WriteToFile(); // Create a new file with default values
+            }
+        }
+
+        // Method to write leaderboard to file
+        public void WriteToFile()
+        {
+            string[] lines = new string[leaderboard.Length];
+            for (int i = 0; i < leaderboard.Length; i++)
+            {
+                lines[i] = leaderboard[i].ToString();
+            }
+            string dataToEncrypt = string.Join(Environment.NewLine, lines);
+            string encryptedData = Encrypt(dataToEncrypt);
+            File.WriteAllText(GameConfig.LEADER_BOARD_FILE, encryptedData);
+        }
+
+        // Method to encrypt data
+        private string Encrypt(string plainText)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = encryptionKey;
+                aes.IV = encryptionIV;
+
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    using (StreamWriter sw = new StreamWriter(cs))
+                    {
+                        sw.Write(plainText);
+                    }
+                    return Convert.ToBase64String(ms.ToArray());
+                }
+            }
+        }
+
+        // Method to decrypt data
+        private string Decrypt(string cipherText)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = encryptionKey;
+                aes.IV = encryptionIV;
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(cipherText)))
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                using (StreamReader sr = new StreamReader(cs))
+                {
+                    return sr.ReadToEnd();
+                }
+            }
+        }
+
+        // Method to save player status to file
+        public void SavePlayerStatus(PlayerStatus playerStatus)
+        {
+            string dataToEncrypt = playerStatus.ToString();
+            string encryptedData = Encrypt(dataToEncrypt);
+            File.WriteAllText(GameConfig.PLAYER_STATUS_FILE, encryptedData);
+        }
+
+        // Method to load player status from file
+        public void LoadPlayerStatus()
+        {
+            if (File.Exists(GameConfig.PLAYER_STATUS_FILE))
+            {
+                string encryptedData = File.ReadAllText(GameConfig.PLAYER_STATUS_FILE);
+                string decryptedData = Decrypt(encryptedData);
+
+                string[] parts = decryptedData.Split(',');
+                if (parts.Length == 5)
+                {
+                    PlayerStatus lastPlayerStatus = new PlayerStatus(
+                        int.Parse(parts[0]),
+                        int.Parse(parts[1]),
+                        int.Parse(parts[2]),
+                        int.Parse(parts[3]),
+                        int.Parse(parts[4])
+                    );
+
+                    // Restore the player's state
+                    program.score = lastPlayerStatus.Score - lastPlayerStatus.LevelScore;
+                    program.levelScore = 0;
+                    program.credit = lastPlayerStatus.Credit;
+                    program.credit2 = lastPlayerStatus.Credit2;
+                    program.levels = lastPlayerStatus.Level;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Player status file not found. Starting a new game.");
+            }
+        }
+    } // end class
+} // end module

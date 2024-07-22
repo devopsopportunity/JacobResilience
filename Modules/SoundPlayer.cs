@@ -13,6 +13,7 @@
 using System.Diagnostics;
 using System.Collections.Concurrent;
 using Config;
+using JacobResilienceGame;
 
 namespace Modules
 {
@@ -28,11 +29,13 @@ namespace Modules
         /// <returns>A task representing the asynchronous operation.</returns>
         public Task PlayAsync(string fileName)
         {
-            soundQueue.Enqueue(fileName);
-            if (!isProcessing)
-            {
-                isProcessing = true;
-                return Task.Run(ProcessSoundQueue);
+            if(Program.soundOn) {
+                soundQueue.Enqueue(fileName);
+                if (!isProcessing)
+                {
+                    isProcessing = true;
+                    return Task.Run(ProcessSoundQueue);
+                }
             }
             return Task.CompletedTask;
         }

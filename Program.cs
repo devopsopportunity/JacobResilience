@@ -20,6 +20,8 @@ namespace JacobResilienceGame
         private LeaderBoard leaderBoard;
         private Utility utility;
 
+        private SoundPlayer soundPlayer;
+
         // Game components
         private GameMenu gameMenu;
         public Game game;
@@ -32,7 +34,9 @@ namespace JacobResilienceGame
 
         // Game state variables
         private bool showMenu;              // Flag indicating if the menu is visible
+        public static bool soundOn=true;    // Flag indicating if the sound is activated
         private bool restart;               // Flag indicating if you want to restart
+        private bool restartPlayerStatus;   // Flag indicating if you want to restart from PlayerStatus
         public string[,] screen;            // Matrix representing the game screen
         private string[,] screenBackup;     // Matrix backup
         public int offset;                  // Offset for screen scrolling
@@ -52,6 +56,7 @@ namespace JacobResilienceGame
         {
             leaderBoard = new LeaderBoard(this);
             utility = new Utility(this);
+            soundPlayer = new SoundPlayer();
 
             // Initialize game components
             gameMenu = new GameMenu(); 
@@ -59,12 +64,11 @@ namespace JacobResilienceGame
             screen = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
             screenBackup = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
             gameComponents = new GameComponents(game, this);
-            string filePath = "JacobResilienceGameLevel.txt";
-            gameLevelInitializer = new GameLevelInitializer(filePath, game);
+            gameLevelInitializer = new GameLevelInitializer(game);
             // gameLevelInitializer.Verify();
             // Console.WriteLine("levels="+gameLevelInitializer.GameLevels.Count());
             // Environment.Exit(1);
-            leaderBoard.InitializeLeaderboard();
+            leaderBoard.ReadFromFile();
             InitializeGame();
         }
 
@@ -113,9 +117,13 @@ namespace JacobResilienceGame
                 ShowWelcomeScreen();
                 InitializeGame();
 
+                if(restartPlayerStatus) {
+                    leaderBoard.LoadPlayerStatus();
+                    restartPlayerStatus = false;
+                }
+                
                 restart = false;
 
-                SoundPlayer soundPlayer = new SoundPlayer();
                 await soundPlayer.PlayAsync("game_start");
 
                 while (!restart)
@@ -123,9 +131,9 @@ namespace JacobResilienceGame
                     if (!showMenu)
                     {
                         ProcessInput();
-                        await UpdateWorld();                    
+                        await UpdateWorld();
                         DrawScreen();
-
+                        
                         // Check for resilience condition
                         if (resilience < 0) {
                             lives--;
@@ -140,13 +148,14 @@ namespace JacobResilienceGame
                         if (lives < 0)
                         {
                             leaderBoard.youLose(); // Call the method to display death screen
+                            leaderBoard.WriteToFile();
                             // Set restart to true after valid initials are entered
                             restart = true;
                         }
                     }
                     else
                     {
-                        gameMenu.ShowMenu(GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH, showMenu, ReturnToGame, ExitGame);
+                        gameMenu.ShowMenu(GameConfig.SCREEN_HEIGHT + 1, GameConfig.SCREEN_WIDTH, showMenu, ReturnToGame, ExitGame, ToggleSound, ArchivePlayer);
                     }
 
                     await Task.Delay(GameConfig.PAUSE_CONTROL);
@@ -207,6 +216,36 @@ namespace JacobResilienceGame
             showMenu = false;
         }
 
+        /// <summary>
+        /// Toggles the sound status of the game.
+        /// </summary>
+        public void ToggleSound()
+        {
+            soundOn = !soundOn; // Toggle the sound status
+            showMenu = false;
+
+            if (soundOn)
+            {
+                // Play the sound for sound on, if necessary
+                // You might want to call a method to actually enable the sound
+                soundPlayer.PlayAsync("coin"); // Example method call, replace with your actual method
+            }
+            else
+            {
+                // Play the sound for sound off, if necessary
+                // You might want to call a method to actually disable the sound
+                soundPlayer.PlayAsync("coin"); // Example method call, replace with your actual method
+            }
+        }
+
+        /// <summary>
+        /// Save player status
+        /// </summary>
+        public void ArchivePlayer()
+        {
+            PlayerStatus playerStatus = new PlayerStatus(score, levelScore, credit, credit2, levels);
+            leaderBoard.SavePlayerStatus(playerStatus);
+        }
 
         /// <summary>
         /// Exits the game application.
@@ -278,17 +317,13 @@ namespace JacobResilienceGame
             }
             
             /*
-            * Code snippet handling the ground representation based on the level:
+            * Code snippet handling the gpavementLevel representation based on the level:
             * Here we determine the symbol representing the ground or surface.
             */
-            string groundSymbol = levels switch {
-                0 => game.VegetationEmojiChar,  // Represents Savannah vegetation
-                1 => game.WaveEmojiChar, // Wave emoji representing water in the Kazinga Channel
-                2 => game.DropletEmojiChar, // Droplet emoji representing water droplet in the Kazinga Channel
-                _ => " " // Default representation
-            };
+            var gameLevel = gameLevelInitializer.GameLevels[levels];
+            string pavementLevel = gameLevel.PavementLevel<0 || gameLevel.PavementLevel>=game.PavementLevel.Length ? game.PavementLevel[levels%10] : game.PavementLevel[gameLevel.PavementLevel];
 
-            for (int x = 0; x < GameConfig.SCREEN_WIDTH / 2; x++) Console.Write(groundSymbol);
+            for (int x = 0; x < GameConfig.SCREEN_WIDTH / 2; x++) Console.Write(pavementLevel);
 
             Console.WriteLine("\nPress 'M' = Show Menu, 'R' = Restart Game");
             Console.WriteLine($"Score: {score}");
@@ -307,6 +342,7 @@ namespace JacobResilienceGame
             for(int i=0; i<lives; i++) Console.Write(game.LivesEmojiChar + "  ");
             for(int i=lives; i<GameConfig.MAX_LIVES; i++) Console.Write("  ");
             Console.WriteLine("");
+            Console.WriteLine(soundOn ? "🔊" : "🔇");
         }
 
         /// <summary>
@@ -318,8 +354,9 @@ namespace JacobResilienceGame
         private bool CanMoveTo(int x, int y)
         {
             if (y < 0 || y >= GameConfig.SCREEN_HEIGHT) return false;
-            int adjustedX = (x + offset) % GameConfig.SCREEN_WIDTH;
-            return screen[y, adjustedX] != game.WallEmojiChar;
+            // int adjustedX = (x + offset) % GameConfig.SCREEN_WIDTH;
+            // return screen[y, adjustedX] != game.WallEmojiChar;
+            return true;
         }
 
         /// <summary>
@@ -397,9 +434,11 @@ namespace JacobResilienceGame
                     } else {
                             levels++;
                             levelScore = 0;
+                            await soundPlayer.PlayAsync("next_level");
                     }
                 } else {
                     leaderBoard.youWin();
+                    leaderBoard.WriteToFile();
                     restart = true;
                 }
             }
@@ -466,7 +505,8 @@ namespace JacobResilienceGame
                 "Use ← and → to move left and right",
                 "Press P for Players",
                 "Press L to view legend",
-                "Press Q to quit"
+                "Press Q to quit",
+                "Press R to restart from the last level played"
             };
 
             string[] story = {
@@ -502,18 +542,16 @@ namespace JacobResilienceGame
             string blinkText = "Press Space Bar to start. You must endure! 💪";
             int blinkColumn = (windowWidth - blinkText.Length) / 2;
             bool isVisible = true;
-            bool spaceBarPressed = false;
 
             DateTime nextBlinkTime = DateTime.Now;
 
-            while (!spaceBarPressed)
+            while (true)
             {
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.Spacebar)
                     {
-                        spaceBarPressed = true;
                         break;
                     }
                     else if (key.Key == ConsoleKey.P)
@@ -540,6 +578,11 @@ namespace JacobResilienceGame
                         Console.ReadKey(true);
                         return;
                     }
+                    else if (key.Key == ConsoleKey.R)
+                    {
+                        restartPlayerStatus = true;
+                        break;
+                    }
                 }
 
                 if (DateTime.Now >= nextBlinkTime)
@@ -553,4 +596,4 @@ namespace JacobResilienceGame
         }
 
     } // End of Program class    
-}
+} // End Module

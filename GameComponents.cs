@@ -45,7 +45,7 @@ namespace JacobResilienceGame
         private CheckEnergy? checkEnergy;               // Energy checker
         private CheckMeat1? checkMeat1;                 // Meat 1 checker
         private CheckMeat2? checkMeat2;                 // Meat 2 checker
-        private CheckWater? checkWater;                 // Water checker
+        private CheckWatermelon? checkWatermelon;       // Watermelon checker
 
         // Constructors
         public GameComponents(Game game, Program program)
@@ -97,7 +97,7 @@ namespace JacobResilienceGame
             checkEnergy = new CheckEnergy(game, program);                 // Energy checker
             checkMeat1 = new CheckMeat1(game, program);                   // Meat 1 checker
             checkMeat2 = new CheckMeat2(game, program);                   // Meat 2 checker
-            checkWater = new CheckWater(game, program);                   // Water checker
+            checkWatermelon = new CheckWatermelon(game, program);         // Watermelon checker
         }
 
         // Method to invoke all mentioned objects with integer parameters
@@ -125,7 +125,7 @@ namespace JacobResilienceGame
             await checkEnergy!.CheckForItems(y, x);               // Check Energy
             await checkMeat1!.CheckForItems(y, x);                // Check Meat 1
             await checkMeat2!.CheckForItems(y, x);                // Check Meat 2
-            await checkWater!.CheckForItems(y, x);                // Check Water
+            await checkWatermelon!.CheckForItems(y, x);           // Check Watermelon
         }
     }
 }

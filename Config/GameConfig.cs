@@ -13,8 +13,22 @@ namespace Config
     /// </summary>
     public static class GameConfig
     {
+
+        // File paths for leaderboard and player status
+        public const string PLAYER_STATUS_FILE = "playerStatus.txt";
+
         /// <summary>
-        /// Width of the game screen.
+        /// Leaderboard
+        /// </summary>
+        public const string LEADER_BOARD_FILE = "leaderboard.txt";
+
+        /// <summary>
+        /// Models
+        /// </summary>
+        public const string FOLDER_MODELS = "GameModels/";
+
+        /// <summary>
+        /// Wav sounds.
         /// </summary>
         public const string FOLDER_WAV = "wav/";
 

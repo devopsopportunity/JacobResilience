@@ -63,23 +63,15 @@ namespace Modules
                             : program.gameLevelInitializer.GameLevels[0];
             // You can now use `gameLevel` as needed
 
-            string currentLevel = program.levels switch
-            {
-                0 => $"{program.game.LevelEmojiChar}  ",
-                1 => $"{program.game.Level1EmojiChar}  ",
-                2 => $"{program.game.Level2EmojiChar}  ",
-                _ => $"{program.game.LevelEmojiChar}  "
-            };
+            string currentLevel = GetLevelEmoji(program.levels);
+
+            int digits = program.levels / 10;
 
             string levelText = $"LEVEL {currentLevel}";
             int screenWidth = GameConfig.SCREEN_WIDTH;
 
-            // Calculate left padding to center the text
-            int leftPadding = (screenWidth - levelText.Length) / 2;
-
-            // Print the centered level title
+            // Print the level title
             Console.Write(levelText);
-            Console.SetCursorPosition(leftPadding, 0);
 
             // Max chars of the description
             int maxChars = GameLevelInitializer.MAX_DESCRIPTION_LENGTH / 2;
@@ -107,11 +99,33 @@ namespace Modules
                 }
                 
                 Console.SetCursorPosition(descriptionLeftPadding, i); // Start from the second line for description
-                Console.WriteLine(lines[i].PadRight(maxChars));
+                Console.WriteLine(" " + lines[i].PadRight(maxChars).PadLeft(digits));
             }
 
             // Set the cursor position to the next line after the description
             Console.SetCursorPosition(0, lines.Length);
+        }
+
+        // Function to get the emoji representation of a number
+        private string GetLevelEmoji(int level)
+        {
+            // Convert the number to a string
+            string levelStr = level.ToString();
+
+            // Create a string to hold the result
+            string emojiRepresentation = "";
+
+            // For each character (digit) in the string representation of the number
+            foreach (char digitChar in levelStr)
+            {
+                // Convert the character to an integer
+                int digit = digitChar - '0';
+
+                // Append the corresponding emoji
+                emojiRepresentation += program.game.LevelEmojis[digit] + " ";
+            }
+
+            return emojiRepresentation;
         }
     }
 }

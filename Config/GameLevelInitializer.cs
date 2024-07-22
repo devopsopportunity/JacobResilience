@@ -8,6 +8,8 @@
  * @hacktlon July 15, 2024
  */
 
+using System.Globalization;
+
 namespace Config
 {
     public class GameLevelInitializer
@@ -18,23 +20,31 @@ namespace Config
         private Dictionary<string, string> emojiMap;
         private Game game;
 
-        /// <summary>
-        /// Constructor to initialize GameLevelInitializer with a file path and game instance.
+      /// <summary>
+        /// Constructor to initialize GameLevelInitializer with a game instance.
         /// </summary>
-        /// <param name="filePath">Path to the file containing game level configurations.</param>
         /// <param name="game">Game instance providing emoji characters.</param>
-        public GameLevelInitializer(string filePath, Game game)
+        public GameLevelInitializer(Game game)
         {
-            if (string.IsNullOrEmpty(filePath))
-            {
-                throw new ArgumentNullException(nameof(filePath), "File path cannot be null or empty.");
-            }
-
             this.game = game;
             GameLevels = new List<GameLevel>();
             emojiMap = new Dictionary<string, string>();
             InitializeEmojiMap();
-            LoadGameLevelsFromFile(filePath);
+
+            // Scan the folder GameConfig.FOLDER_MODELS
+            string folderPath = GameConfig.FOLDER_MODELS;
+            string[] files = Directory.GetFiles(folderPath, "*.txt");
+
+            if (files.Length == 0)
+            {
+                Console.WriteLine("Please set at least one Game Level Model file containing the data: LEVEL_DESCRIPTION:, TOTAL_SCORE_DURATION:, PAVEMENT:, ENTITY:, SCORE_INTERVAL:, MIN_E:, MAX_E:, MIN_H:, MAX_H:");
+                Environment.Exit(1);
+            }
+
+            foreach (string filePath in files)
+            {
+                LoadGameLevelsFromFile(filePath);
+            }
         }
 
         /// <summary>
@@ -90,7 +100,7 @@ namespace Config
                         description = description.PadRight(MAX_DESCRIPTION_LENGTH);
                     }
 
-                    Console.WriteLine(description + " " + description.Length);
+                    // Console.WriteLine(description + " " + description.Length);
 
                     GameLevel currentLevel = new GameLevel(description);
 
@@ -99,58 +109,66 @@ namespace Config
                     {
                         currentLevel.TotalScoreDuration = int.Parse(lines[i].Split(':')[1].Trim());
                         i++;
-                        for (; i < lines.Length; i++)
+                        
+                        if (lines[i].StartsWith("PAVEMENT:"))
                         {
-                            if (lines[i].StartsWith("ENTITY"))
-                            {
-                                CheckersConfig checkersConfig = new CheckersConfig();
+                            string pavement = lines[i].Split(':')[1].Trim();
+                            currentLevel.PavementLevel = pavement.Equals("AUTO") ? -1 : int.Parse(pavement);
+                            i++;
 
-                                for (; i < lines.Length; i++)
+                            for (; i < lines.Length; i++)
+                            {
+                                if (lines[i].StartsWith("ENTITY"))
                                 {
-                                    var keyValue = lines[i].Split(':');
-                                    var key = keyValue[0].Trim();
-                                    var value = keyValue[1].Trim();
+                                    CheckersConfig checkersConfig = new CheckersConfig();
 
-                                    switch (key)
+                                    for (; i < lines.Length; i++)
                                     {
-                                        case "ENTITY":
-                                            checkersConfig.Character = ParseCharacter(value);
-                                            break;
-                                        case "SCORE_INTERVAL":
-                                            checkersConfig.ScoreIntervals = ParseScoreIntervals(value);
-                                            break;
-                                        case "MIN_E":
-                                            checkersConfig.MinEntities = int.Parse(value);
-                                            break;
-                                        case "MAX_E":
-                                            checkersConfig.MaxEntities = int.Parse(value);
-                                            break;
-                                        case "MIN_H":
-                                            if(value.Equals("H - 1")) 
-                                                checkersConfig.MinHeight = GameConfig.SCREEN_HEIGHT - 1;
-                                            else     
-                                            checkersConfig.MinHeight = ParseHeight(value);
-                                            break;
-                                        case "MAX_H":
-                                            if(value.Equals("H - 1")) 
-                                                checkersConfig.MaxHeight = GameConfig.SCREEN_HEIGHT - 1;
-                                            else
-                                            checkersConfig.MaxHeight = ParseHeight(value);
-                                            break;
-                                    }
+                                        var keyValue = lines[i].Split(':');
+                                        var key = keyValue[0].Trim();
+                                        var value = keyValue[1].Trim();
 
-                                    if (lines[i].StartsWith("MAX_H:"))
-                                    {
-                                        break;
+                                        switch (key)
+                                        {
+                                            case "ENTITY":
+                                                checkersConfig.Character = ParseCharacter(value);
+                                                break;
+                                            case "SCORE_INTERVAL":
+                                                checkersConfig.ScoreIntervals = ParseScoreIntervals(value);
+                                                break;
+                                            case "MIN_E":
+                                                checkersConfig.MinEntities = int.Parse(value);
+                                                break;
+                                            case "MAX_E":
+                                                checkersConfig.MaxEntities = int.Parse(value);
+                                                break;
+                                            case "MIN_H":
+                                                if(value.Equals("H - 1")) 
+                                                    checkersConfig.MinHeight = GameConfig.SCREEN_HEIGHT - 1;
+                                                else     
+                                                checkersConfig.MinHeight = ParseHeight(value);
+                                                break;
+                                            case "MAX_H":
+                                                if(value.Equals("H - 1")) 
+                                                    checkersConfig.MaxHeight = GameConfig.SCREEN_HEIGHT - 1;
+                                                else
+                                                checkersConfig.MaxHeight = ParseHeight(value);
+                                                break;
+                                        }
+
+                                        if (lines[i].StartsWith("MAX_H:"))
+                                        {
+                                            break;
+                                        }
                                     }
+                                    currentLevel.CheckersConfigs.Add(checkersConfig);
                                 }
-                                currentLevel.CheckersConfigs.Add(checkersConfig);
-                            }
 
-                            if (lines[i].StartsWith("LEVEL_DESCRIPTION:"))
-                            {
-                                break;
-                            }
+                                if (lines[i].StartsWith("LEVEL_DESCRIPTION:"))
+                                {
+                                    break;
+                                }
+                            } // for
                         }
                     }
                     GameLevels.Add(currentLevel);

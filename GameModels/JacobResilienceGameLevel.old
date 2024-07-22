@@ -1,0 +1,195 @@
+LEVEL_DESCRIPTION: You are now in the Savannah! You'll face poachers' traps that attempt to reduce your health.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: 6
+ENTITY: hippo
+SCORE_INTERVAL: [1, 5]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: danger
+SCORE_INTERVAL: [2, 4], [6, 8], [11, 13]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 1
+LEVEL_DESCRIPTION: Now you are swimming through the Kazinga Channel for almost a mile and encountering hippos along your path! They reduce your resilience by one point.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [2, 4], [6, 8], [11, 13]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 1
+LEVEL_DESCRIPTION: A more challenging level as you navigate through another part of the Kazinga Channel, now infested with crocodiles that decrease your stamina level!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [1, 3], [5, 7], [9, 10]
+MIN_E: 1
+MAX_E: 4
+MIN_H: H / 2
+MAX_H: H - 1
+LEVEL_DESCRIPTION: In this level, you enter the dense jungle filled with dangerous plants and animals. Beware of hazards that might reduce your health!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [3, 6], [8, 12], [15, 18]
+MIN_E: 3
+MAX_E: 6
+MIN_H: H / 4
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You have reached the high cliffs overlooking the Kazinga Channel. Watch for falling rocks and sudden drops that might affect your health.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [2, 4], [6, 9], [11, 14]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now in the deep forest where you encounter wild animals and treacherous paths. Keep your health and stamina in check!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: hippo
+SCORE_INTERVAL: [1, 4], [5, 8], [9, 12]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: This level takes you to the treacherous swamp area filled with quicksand and venomous creatures. Stay alert and manage your resources carefully.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [3, 6], [7, 10], [13, 16]
+MIN_E: 3
+MAX_E: 6
+MIN_H: H / 4
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now navigating through the rocky canyon. Watch out for falling rocks and unstable ground that could impact your health and stamina.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [2, 5], [6, 9], [10, 13]
+MIN_E: 2
+MAX_E: 4
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: In this level, you encounter the hazardous desert with extreme temperatures and scarce resources. Manage your energy and health carefully.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: energy
+SCORE_INTERVAL: [2, 4], [7, 10], [12, 15]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You have reached the ancient ruins, a mysterious place with hidden traps and secrets. Keep your health and stamina in check as you explore.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [4, 7], [8, 12], [14, 17]
+MIN_E: 3
+MAX_E: 6
+MIN_H: H / 4
+MAX_H: H - 3
+LEVEL_DESCRIPTION: You are now navigating through the rocky canyon. Watch out for falling rocks and unstable ground that could impact your health and stamina.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [2, 5], [6, 9], [10, 13]
+MIN_E: 2
+MAX_E: 4
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: Welcome to the final challenge! You must navigate through the ultimate gauntlet filled with the toughest enemies and obstacles you have faced so far. Good luck!
+TOTAL_SCORE_DURATION: 1 
+PAVEMENT: AUTO
+ENTITY: energy
+SCORE_INTERVAL: [5, 8], [10, 15], [20, 25]
+MIN_E: 3
+MAX_E: 7
+MIN_H: H / 4
+MAX_H: H - 3
+LEVEL_DESCRIPTION: AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA AAAAAAAA Welcome to the final challenge! You must navigate through the ultimate gauntlet filled with the toughest enemies and obstacles you have faced so far. Good luck!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: energy
+SCORE_INTERVAL: [5, 8], [10, 15], [20, 25]
+MIN_E: 3
+MAX_E: 7
+MIN_H: H / 4
+MAX_H: H - 3
+LEVEL_DESCRIPTION: Now you are swimming through the Kazinga Channel for almost a mile and encountering hippos along your path! They reduce your resilience by one point.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [2, 4], [6, 8], [11, 13]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 1
+LEVEL_DESCRIPTION: A more challenging level as you navigate through another part of the Kazinga Channel, now infested with crocodiles that decrease your stamina level!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [1, 3], [5, 7], [9, 10]
+MIN_E: 1
+MAX_E: 4
+MIN_H: H / 2
+MAX_H: H - 1
+LEVEL_DESCRIPTION: In this level, you enter the dense jungle filled with dangerous plants and animals. Beware of hazards that might reduce your health!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [3, 6], [8, 12], [15, 18]
+MIN_E: 3
+MAX_E: 6
+MIN_H: H / 4
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You have reached the high cliffs overlooking the Kazinga Channel. Watch for falling rocks and sudden drops that might affect your health.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [2, 4], [6, 9], [11, 14]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now in the deep forest where you encounter wild animals and treacherous paths. Keep your health and stamina in check!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: hippo
+SCORE_INTERVAL: [1, 4], [5, 8], [9, 12]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: This level takes you to the treacherous swamp area filled with quicksand and venomous creatures. Stay alert and manage your resources carefully.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [3, 6], [7, 10], [13, 16]
+MIN_E: 3
+MAX_E: 6
+MIN_H: H / 4
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now navigating through the rocky canyon. Watch out for falling rocks and unstable ground that could impact your health and stamina.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [2, 5], [6, 9], [10, 13]
+MIN_E: 2
+MAX_E: 4
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: In this level, you encounter the hazardous desert with extreme temperatures and scarce resources. Manage your energy and health carefully.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: energy
+SCORE_INTERVAL: [2, 4], [7, 10], [12, 15]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
