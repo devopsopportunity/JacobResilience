@@ -38,6 +38,11 @@ namespace Config
         public const string PLAY_BACK_GAME_SOUND = "game_sound";
 
         /// <summary>
+        /// Playback Wait for keyboard
+        /// </summary>
+        public const string PLAY_BACK_WAIT_FOR_KEY = "wait_for_key";
+
+        /// <summary>
         /// Width of the game screen.
         /// </summary>
         public const int SCREEN_WIDTH = 100;

@@ -18,6 +18,7 @@ namespace Modules
     public class LeaderBoard
     {
         private Program program;
+        private AudioManager audioManager;
 
         // Static array for the leaderboard of the top 10 scores.
         private PlayerScore[] leaderboard = new PlayerScore[10];
@@ -30,6 +31,7 @@ namespace Modules
         public LeaderBoard(Program program)
         {
             this.program = program;
+            audioManager = new AudioManager(GameConfig.PLAY_BACK_WAIT_FOR_KEY);
             InitializeLeaderboard();
             ReadFromFile();
             LoadPlayerStatus();
@@ -47,6 +49,8 @@ namespace Modules
         // Updated youLose method to handle leaderboard
         public void youLose()
         {
+            program.StopWaveMusic();
+
             SoundPlayer soundPlayer = new SoundPlayer();
             soundPlayer.PlayAsync("game_over");
 
@@ -81,6 +85,12 @@ namespace Modules
                 {
                     Console.WriteLine("Invalid initials. Please enter exactly 3 letters.");
                 }
+            }         
+
+            if (Program.audioOn)
+            {
+                // Play the audio for audio on, if necessary
+                audioManager.PlayBackgroundMusicAsync();
             }
 
             // After valid initials are entered, update the leaderboard
@@ -97,14 +107,25 @@ namespace Modules
             // After valid initials are entered, express gratitude and invite to restart
             Console.WriteLine($"\n🙏 Thank you, {initials}, for playing! Your score: {program.score} 🎮");
 
-            // After valid initials are entered, restart the game
-            Console.WriteLine("\nPress any key to restart...");
-            Console.ReadKey(true);
+            // Prompt the user to press the space bar to continue
+            Console.WriteLine("\nPress space bar to continue...");
+            while (Console.ReadKey(true).Key != ConsoleKey.Spacebar)
+            {
+                // Wait for the space bar to be pressed
+            }
+
+            if (Program.audioOn)
+            {
+                // Stop the audio for audio off, if necessary
+                audioManager.StopBackgroundMusic();
+            }
         }
 
         // Method to display "You Win!" screen
         public void youWin()
         {
+            program.StopWaveMusic();
+
             SoundPlayer soundPlayer = new SoundPlayer();
             soundPlayer.PlayAsync("win"); // Play a win sound
 
@@ -141,6 +162,12 @@ namespace Modules
                 }
             }
 
+            if (Program.audioOn)
+            {
+                // Play the audio for audio on, if necessary
+                audioManager.PlayBackgroundMusicAsync();
+            }
+
             // After valid initials are entered, update the leaderboard
             PlayerScore currentPlayer = new PlayerScore(initials.ToUpper(), program.score, program.credit + (program.credit2 * 100), program.levels);
             UpdateLeaderboard(currentPlayer);
@@ -151,9 +178,18 @@ namespace Modules
             // After valid initials are entered, express gratitude and invite to restart
             Console.WriteLine($"\n🙏 Thank you, {initials}, for playing! Your score: {program.score} 🎮");
 
-            // After valid initials are entered, restart the game
-            Console.WriteLine("\nPress any key to restart...");
-            Console.ReadKey(true);
+            // Prompt the user to press the space bar to continue
+            Console.WriteLine("\nPress space bar to continue...");
+            while (Console.ReadKey(true).Key != ConsoleKey.Spacebar)
+            {
+                // Wait for the space bar to be pressed
+            }
+
+            if (Program.audioOn)
+            {
+                // Stop the audio for audio off, if necessary
+                audioManager.StopBackgroundMusic();
+            }
         }
 
         private string ReadInitials()

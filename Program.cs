@@ -269,7 +269,7 @@ namespace JacobResilienceGame
             }
             else
             {
-                // Play the audio for audio off, if necessary
+                // Stop the audio for audio off, if necessary
                 audioManager.StopBackgroundMusic();
             }
         }
@@ -280,8 +280,33 @@ namespace JacobResilienceGame
         public void ExitGame()
         {
             Console.Clear();
+            StopWaveMusic();
             Console.WriteLine("Thank you for playing Jacob's Resilience! 🦁");
             Environment.Exit(0);
+        }
+
+        /// <summary>
+        /// Force stop the audio of the game.
+        /// </summary>
+        public void StopWaveMusic()
+        {
+            if (audioOn)
+            {
+                // Play the audio for audio off, if necessary
+                audioManager.StopBackgroundMusic();
+            }
+        }
+
+        /// <summary>
+        /// Force restart the audio of the game.
+        /// </summary>
+        public void RestartWaveMusic()
+        {
+            if (audioOn)
+            {
+                // Play the audio for audio on, if necessary
+                audioManager.PlayBackgroundMusicAsync();
+            }
         }
 
         /// <summary>
