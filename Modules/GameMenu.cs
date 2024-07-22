@@ -10,16 +10,20 @@ namespace Modules
 {
     public class GameMenu
     {
-        private const int ADJUST_LINES = 7;
+        private const int ADJUST_LINES_START = 3;
+        private const int ADJUST_LINES_END = 7;
         private static readonly string[] menuOptions = new string[]
         {
             "H - Hide the menu and return to the game",
             "S - Sound {0}", // Expecting one argument for sound status
             "A - Archive player state (last saved: {0})", // Expecting one argument for the last saved date
+            "W - Sound wave {0}", // Expecting one argument for sound wave status
             "Q - Exit the game"
         };
 
         private bool soundOn = true; // Track sound status
+        private bool waveOn = true; // Track sound wave status
+        public static bool audioOn = true; // Flag indicating if the audio is activated
         private DateTime lastSavedDate = DateTime.MinValue; // Track last archive date
 
         private void TextMenu(int screenHeight, int screenWidth) 
@@ -33,8 +37,9 @@ namespace Modules
             {
                 string option = i switch
                 {
-                    1 => string.Format(menuOptions[i], soundOn ? "ON 🔊" : "OFF 🔇"), // Format sound option
+                    1 => string.Format(menuOptions[i], soundOn ? "ON 🔊" : "OFF 🔊 🔇"), // Format sound option
                     2 => string.Format(menuOptions[i], lastSavedDate == DateTime.MinValue ? "Never" : lastSavedDate.ToString("g")), // Format archive option
+                    3 => string.Format(menuOptions[i], waveOn ? "ON 🎵" : "OFF 🎵 🔇"), // Format sound wave option
                     _ => menuOptions[i] // Default case for other options
                 };
 
@@ -55,10 +60,12 @@ namespace Modules
         /// <param name="exitGameAction">Action to exit the game.</param>
         /// <param name="toggleSoundAction">Action to toggle sound on or off.</param>
         /// <param name="archivePlayerAction">Action to archive player state.</param>
-        public void ShowMenu(int screenHeight, int screenWidth, bool showMenu, Action returnToGameAction, Action exitGameAction, Action toggleSoundAction, Action archivePlayerAction)
+        /// <param name="toggleWaveAction">Action to toggle sound wave on or off.</param>
+        public void ShowMenu(int screenHeight, int screenWidth, Action returnToGameAction, Action exitGameAction, Action toggleSoundAction, Action archivePlayerAction, Action toggleWaveAction)
         {
+            ClearMenuArea(screenHeight, screenWidth);
             TextMenu(screenHeight, screenWidth);
-            ManageMenuInput(screenHeight, screenWidth, returnToGameAction, exitGameAction, toggleSoundAction, archivePlayerAction);
+            ManageMenuInput(screenHeight, screenWidth, returnToGameAction, exitGameAction, toggleSoundAction, archivePlayerAction, toggleWaveAction);
         }
 
         /// <summary>
@@ -70,7 +77,8 @@ namespace Modules
         /// <param name="exitGameAction">Action to exit the game.</param>
         /// <param name="toggleSoundAction">Action to toggle sound on or off.</param>
         /// <param name="archivePlayerAction">Action to archive player state.</param>
-        private void ManageMenuInput(int screenHeight, int screenWidth, Action returnToGameAction, Action exitGameAction, Action toggleSoundAction, Action archivePlayerAction)
+        /// <param name="toggleWaveAction">Action to toggle sound wave on or off.</param>
+        private void ManageMenuInput(int screenHeight, int screenWidth, Action returnToGameAction, Action exitGameAction, Action toggleSoundAction, Action archivePlayerAction, Action toggleWaveAction)
         {
             while (true)
             {
@@ -93,6 +101,12 @@ namespace Modules
                         case ConsoleKey.A:
                             ClearMenuArea(screenHeight, screenWidth);
                             ArchivePlayerState(archivePlayerAction); // Archive the player state
+                            TextMenu(screenHeight, screenWidth);
+                            break;
+
+                        case ConsoleKey.W:
+                            ToggleWave(toggleWaveAction); // Toggle sound wave
+                            ClearMenuArea(screenHeight, screenWidth);
                             TextMenu(screenHeight, screenWidth);
                             break;
 
@@ -126,13 +140,23 @@ namespace Modules
         }
 
         /// <summary>
+        /// Toggles the sound wave status and invokes the corresponding action.
+        /// </summary>
+        /// <param name="toggleWaveAction">Action to toggle sound wave on or off.</param>
+        private void ToggleWave(Action toggleWaveAction)
+        {
+            waveOn = !waveOn;
+            toggleWaveAction(); // Execute the action associated with wave toggling
+        }
+
+        /// <summary>
         /// Clears the menu area on the console.
         /// </summary>
         /// <param name="screenHeight">Height of the screen.</param>
         /// <param name="screenWidth">Width of the screen.</param>
         private void ClearMenuArea(int screenHeight, int screenWidth)
         {
-            for (int y = screenHeight; y < screenHeight + ADJUST_LINES + menuOptions.Length; y++)
+            for (int y = screenHeight + ADJUST_LINES_START; y < screenHeight + ADJUST_LINES_END + menuOptions.Length; y++)
             {
                 Console.SetCursorPosition(0, y);
                 Console.WriteLine(new string(' ', screenWidth));

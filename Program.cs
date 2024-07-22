@@ -21,6 +21,7 @@ namespace JacobResilienceGame
         private Utility utility;
 
         private SoundPlayer soundPlayer;
+        private AudioManager audioManager;
 
         // Game components
         private GameMenu gameMenu;
@@ -35,6 +36,7 @@ namespace JacobResilienceGame
         // Game state variables
         private bool showMenu;              // Flag indicating if the menu is visible
         public static bool soundOn=true;    // Flag indicating if the sound is activated
+        public static bool audioOn=true;    // Flag indicating if the audio is activated
         private bool restart;               // Flag indicating if you want to restart
         private bool restartPlayerStatus;   // Flag indicating if you want to restart from PlayerStatus
         public string[,] screen;            // Matrix representing the game screen
@@ -57,6 +59,7 @@ namespace JacobResilienceGame
             leaderBoard = new LeaderBoard(this);
             utility = new Utility(this);
             soundPlayer = new SoundPlayer();
+            audioManager = new AudioManager(GameConfig.PLAY_BACK_GAME_SOUND);
 
             // Initialize game components
             gameMenu = new GameMenu(); 
@@ -124,7 +127,7 @@ namespace JacobResilienceGame
                 
                 restart = false;
 
-                await soundPlayer.PlayAsync("game_start");
+                await audioManager.PlayBackgroundMusicAsync();
 
                 while (!restart)
                 {
@@ -155,11 +158,15 @@ namespace JacobResilienceGame
                     }
                     else
                     {
-                        gameMenu.ShowMenu(GameConfig.SCREEN_HEIGHT + 1, GameConfig.SCREEN_WIDTH, showMenu, ReturnToGame, ExitGame, ToggleSound, ArchivePlayer);
+                        gameMenu.ShowMenu(GameConfig.SCREEN_HEIGHT + 1, GameConfig.SCREEN_WIDTH,
+                            ReturnToGame, ExitGame, ToggleSound, ArchivePlayer, ToggleWave);
                     }
 
                     await Task.Delay(GameConfig.PAUSE_CONTROL);
                 } // while 1
+
+                audioManager.StopBackgroundMusic();
+
             } // while 2   
         }
 
@@ -245,6 +252,26 @@ namespace JacobResilienceGame
         {
             PlayerStatus playerStatus = new PlayerStatus(score, levelScore, credit, credit2, levels);
             leaderBoard.SavePlayerStatus(playerStatus);
+        }
+
+        /// <summary>
+        /// Toggles the audio status of the game.
+        /// </summary>
+        public void ToggleWave()
+        {
+            audioOn = !audioOn; // Toggle the audio status
+            showMenu = false;
+
+            if (audioOn)
+            {
+                // Play the audio for audio on, if necessary
+                audioManager.PlayBackgroundMusicAsync();
+            }
+            else
+            {
+                // Play the audio for audio off, if necessary
+                audioManager.StopBackgroundMusic();
+            }
         }
 
         /// <summary>
@@ -342,7 +369,8 @@ namespace JacobResilienceGame
             for(int i=0; i<lives; i++) Console.Write(game.LivesEmojiChar + "  ");
             for(int i=lives; i<GameConfig.MAX_LIVES; i++) Console.Write("  ");
             Console.WriteLine("");
-            Console.WriteLine(soundOn ? "🔊" : "🔇");
+            Console.WriteLine(soundOn ? "🔊  " : "🔊 🔇");
+            Console.WriteLine(audioOn ? "🎵  " : "🎵 🔇");
         }
 
         /// <summary>

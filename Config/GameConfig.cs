@@ -33,6 +33,11 @@ namespace Config
         public const string FOLDER_WAV = "wav/";
 
         /// <summary>
+        /// Playback Game Sound
+        /// </summary>
+        public const string PLAY_BACK_GAME_SOUND = "game_sound";
+
+        /// <summary>
         /// Width of the game screen.
         /// </summary>
         public const int SCREEN_WIDTH = 100;
