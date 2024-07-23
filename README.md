@@ -5,9 +5,9 @@ This hot summer has inspired me to create this C# .NET 8 game, based on the true
 
 ## GamePlay Demo
 
-[Download and watch the gameplay video](GamePlay.webm)
+Watch the gameplay video of "Jacob's Resilience" on YouTube:
 
-> Note: If you have trouble playing the video, we recommend using [VLC media player](https://www.videolan.org/vlc/).
+[Watch on YouTube](https://youtu.be/cRSOrJi2yA4)
 
 ## Overview
 
@@ -51,25 +51,4 @@ To get started with Jacob's Resilience on your system, follow these steps:
      ```bash
      dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true ./csproj/DotNet.Docker.csproj
      ```
-
-## Folder Structure
-
-```
-/JacobResilience
-├── bin/                    // Contains binary files and build outputs
-├── Checkers/               // Contains checkers for the game
-├── csproj/                 // Contains project configuration files
-├── obj/                    // Contains object files generated during compilation
-├── wav/                    // Contains audio files for the game
-├── README.md               // Project README file
-├── Dockerfile              // Docker configuration file
-├── EmojiDatabase.cs        // Class to manage the emoji database
-├── GameConfig.cs           // Game configurations (constants, screen dimensions, etc.)
-├── Game.cs                 // Main game class
-├── GameMenu.cs             // Game menu
-├── PlayerScore.cs          // Player score management
-├── Program.cs              // Main program class (entry point)
-├── SoundPlayer.cs          // Class for sound management
-├── start_docker.sh         // Script to start the game via Docker
-└── start.sh                // Script to start the game in normal mode
-```
+     
