@@ -6,12 +6,18 @@
  * It initializes configurations for various game components such as animals, coins,
  * enemies, and energies.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
+
 namespace Config
 {
     public static class CheckersConfigInitializer
     {
+        /// <summary>
+        /// Initializes an array of CheckersConfig with predefined settings for various game components.
+        /// </summary>
+        /// <param name="game">An instance of the Game class providing emoji characters for configuration.</param>
+        /// <returns>An array of CheckersConfig objects with specific settings for different game entities.</returns>
         public static CheckersConfig[] InitializeCheckersConfigs(Game game)
         {
             // Initialize the CheckersConfig array

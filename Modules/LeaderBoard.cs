@@ -1,12 +1,13 @@
 /*
  * LeaderBoard.cs
- * @authors Edoardo Sabatini & ChatGPT 3.5
+ * Authors: Edoardo Sabatini & ChatGPT 3.5
  * -------------------------------------------------------------
- * This file defines the LeaderBoard class, managing the high
+ * This file defines the LeaderBoard class, which manages the high
  * scores and player rankings for the Jacob's Resilience game.
- * It includes methods for adding, sorting, and displaying scores.
+ * It includes functionality for adding, sorting, displaying scores,
+ * and handling encryption and decryption of leaderboard data.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using System.Security.Cryptography;
 using System.Text;

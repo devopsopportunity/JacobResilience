@@ -1,13 +1,14 @@
 /*
  * EmojiDatabase.cs
- * @ Edoardo Sabatini & ChatGPT 3.5
+ * @authors Edoardo Sabatini & ChatGPT 3.5
  * -------------------------------------------
  * This file defines the Emoji and EmojiDatabase classes to manage an emoji database.
  * -------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 namespace EmojiGame
 {
+    // Class representing an individual emoji with its attributes
     public class Emoji
     {
         public int Id { get; set; }           // Unique identifier of the emoji
@@ -16,6 +17,10 @@ namespace EmojiGame
         public string Description { get; set; } // Emoji description
 
         // Constructor to initialize an instance of Emoji
+        // @param id - Unique identifier for the emoji
+        // @param name - Name of the emoji
+        // @param character - Unicode character representing the emoji
+        // @param description - Description of the emoji
         public Emoji(int id, string name, string character, string description)
         {
             Id = id;
@@ -25,11 +30,14 @@ namespace EmojiGame
         }
     }
 
+    // Class representing a database of emojis
     public class EmojiDatabase
     {
-        public List<Emoji> Emojis { get; private set; } // List of all emojis in the database
+        // List of all emojis in the database
+        public List<Emoji> Emojis { get; private set; }
 
         // Constructor to initialize the database with emojis
+        // Populates the Emojis list with a predefined set of emojis
         public EmojiDatabase()
         {
             Emojis = new List<Emoji>
@@ -64,7 +72,7 @@ namespace EmojiGame
                 new Emoji(27, "Coin_1", "🟡", "Represents currency or coins used in the game."),
                 new Emoji(28, "Zebra", "🦓", "Represents a zebra, a striped animal often found in savannas."),
                 new Emoji(29, "Apple", "🍎", "Represents energy apples in the game."),
-                new Emoji(30, "Stamina", "🛡️", "Represents stamina capabilities."),                
+                new Emoji(30, "Stamina", "🛡️", "Represents stamina capabilities."),
                 new Emoji(31, "Health", "❤️", "Represents health or vitality."),
                 new Emoji(32, "Resilience", "💪", "Represents resilience or strength."),
                 new Emoji(33, "Channel", "🏞️", "Represents the Kazinga Channel in Uganda on the path."),
@@ -89,15 +97,23 @@ namespace EmojiGame
 
         /// <summary>
         /// Prints the legend of emojis with their descriptions.
+        /// Displays all emojis in the database along with their descriptions.
         /// </summary>
         public static void PrintEmojiLegend()
         {
+            // Create an instance of the EmojiDatabase
             EmojiDatabase db = new EmojiDatabase();
+            
+            // Print the title for the emoji legend
             Console.WriteLine("Emoji Legend:");
+            
+            // Iterate through each emoji in the database and print its character and description
             foreach (var emoji in db.Emojis)
             {
                 Console.WriteLine($"{emoji.Character} - {emoji.Description}");
             }
+            
+            // Prompt the user to press any key to return to the welcome screen
             Console.WriteLine("\nPress any key to come back to the welcome screen...");
             Console.ReadKey();
         }

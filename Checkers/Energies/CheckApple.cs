@@ -9,7 +9,7 @@
  * This class inherits from DelegateEnergyChecker to leverage the abstract behavior definition and
  * dynamically assigned behavior via the EnergyBehavior event.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Config;
 
@@ -27,9 +27,10 @@ namespace JacobResilienceGame.Energies
         /// </summary>
         public override void EnergyBehavior()
         {
-            // Increase player's energy when an apple is collected
+            // Increase player's lives when an apple is collected
             program.lives++;
-            if(program.lives>GameConfig.MAX_LIVES) program.lives = GameConfig.MAX_LIVES;
+            if (program.lives > GameConfig.MAX_LIVES) 
+                program.lives = GameConfig.MAX_LIVES; // Ensure lives do not exceed maximum limit
         }
     }
 }

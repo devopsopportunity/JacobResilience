@@ -5,8 +5,11 @@
  * This file defines the CheckDiamond class for handling Diamond in the Jacob's Resilience game.
  * It specializes the abstract DelegateCoinChecker class, implementing the CoinBehavior method
  * to specifically handle Diamond as an item in accordance with the Liskov Substitution Principle (LSP).
+ * 
+ * This class inherits from DelegateCoinChecker to leverage the abstract behavior definition and
+ * dynamically assigned behavior via the CoinBehavior event.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Config;
 

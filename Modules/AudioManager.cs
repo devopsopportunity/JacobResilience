@@ -1,14 +1,15 @@
 /*
  * AudioManager.cs
- * @authors Edoardo Sabatini & ChatGPT
+ * Authors: Edoardo Sabatini & ChatGPT
  * -------------------------------------------------------------
  * This file defines the AudioManager class for managing background music.
  * It handles asynchronous playback of a music file in a loop using external processes,
  * ensuring smooth execution without blocking the main thread.
  * The music is played using the `play` command from `sox` to manage looping.
  * -------------------------------------------------------------
- * @hacktlon July 22, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
+
 using System.Diagnostics;
 using Config;
 using JacobResilienceGame;

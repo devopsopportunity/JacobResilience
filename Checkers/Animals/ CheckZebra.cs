@@ -9,14 +9,22 @@
  * This class inherits from DelegateAnimalChecker to leverage the abstract behavior definition and
  * dynamically assigned behavior via the AnimalBehavior event.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Config;
 
 namespace JacobResilienceGame.Animals
 {
+    /// <summary>
+    /// Concrete implementation of DelegateAnimalChecker for handling zebras.
+    /// </summary>
     public class CheckZebra : DelegateAnimalChecker
     {
+        /// <summary>
+        /// Initializes a new instance of the CheckZebra class.
+        /// </summary>
+        /// <param name="game">Instance of the Game class for accessing emojis and configurations.</param>
+        /// <param name="program">Instance of the Program class for interaction.</param>
         public CheckZebra(Game game, Program program) : base(game, program, game.ZebraEmojiChar, "zebra")
         {
             // Additional initialization specific to zebras can go here if needed

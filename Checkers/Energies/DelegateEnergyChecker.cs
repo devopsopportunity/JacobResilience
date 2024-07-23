@@ -12,7 +12,7 @@
  * to dynamically delegate and structure the behavior of encountering different energy types through the
  * EnergyBehavior event, enabling customizable behavior for each specific energy type.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using JacobResilienceGame.Checkers;
 using Config;

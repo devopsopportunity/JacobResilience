@@ -8,8 +8,9 @@
  * Sound files are played using external processes to leverage system
  * capabilities and manage playback exceptions effectively.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
+ 
 using System.Diagnostics;
 using System.Collections.Concurrent;
 using Config;

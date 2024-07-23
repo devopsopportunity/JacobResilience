@@ -9,7 +9,7 @@
  * This class inherits from DelegateEnergyChecker to leverage the abstract behavior definition and
  * dynamically assigned behavior via the EnergyBehavior event.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Config;
 
@@ -29,9 +29,12 @@ namespace JacobResilienceGame.Energies
         {
             // Increase player's stamina and resilience when Meat_2 is collected
             program.stamina++;
-            if(program.stamina>GameConfig.MAX_STAMINA) program.stamina = GameConfig.MAX_STAMINA;
+            if (program.stamina > GameConfig.MAX_STAMINA) 
+                program.stamina = GameConfig.MAX_STAMINA; // Ensure stamina does not exceed maximum limit
+
             program.resilience++;
-            if(program.resilience>GameConfig.MAX_RESILIENCE) program.resilience = GameConfig.MAX_RESILIENCE;
+            if (program.resilience > GameConfig.MAX_RESILIENCE) 
+                program.resilience = GameConfig.MAX_RESILIENCE; // Ensure resilience does not exceed maximum limit
         }
     }
 }

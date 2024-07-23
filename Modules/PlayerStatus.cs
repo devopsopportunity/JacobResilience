@@ -3,13 +3,16 @@
  * @authors 
  * Edoardo Sabatini & ChatGPT 3.5
  * -------------------------------------------------------------
- * This file defines the PlayerStatus class, managing the player's
- * current game status including scores, credits, and levels.
- * It includes properties to store the player's progress and 
- * methods to format and display the status.
+ * This file defines the PlayerStatus class, which manages the
+ * player's current game status, including scores, credits, and
+ * levels. It includes properties to store the player's progress
+ * and methods to format and display the status. The class provides
+ * functionality to convert the status to a string representation
+ * and to output it in a readable format.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
+
 namespace Modules
 {
     public class PlayerStatus

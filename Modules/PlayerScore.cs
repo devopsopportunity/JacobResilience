@@ -1,12 +1,14 @@
 /*
  * PlayerScore.cs
  * -------------------------------------------------------------
- * This file defines the PlayerScore class which represents
+ * This file defines the PlayerScore class, which represents
  * a player's score in the Jacob's Resilience game. It includes
- * properties for username, score, total credits, current date
- * and time, position in the leaderboard, and level achieved.
+ * properties for username, score, total credits, level achieved,
+ * and the date and time of the score entry. The class includes
+ * methods for displaying the score and converting it to a string
+ * representation suitable for file storage.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 namespace Modules
 {

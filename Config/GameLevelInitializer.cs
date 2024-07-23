@@ -5,7 +5,7 @@
  * This file contains the initialization logic for the GameLevel array.
  * It reads from a text file to initialize configurations for various game levels.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 namespace Config
 {

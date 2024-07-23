@@ -9,7 +9,7 @@
  * This class inherits from DelegateEnemyChecker to leverage the abstract behavior definition and
  * dynamically assigned behavior via the EnemyBehavior event.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Config;
 

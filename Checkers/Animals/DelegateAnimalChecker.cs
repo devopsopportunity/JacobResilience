@@ -12,7 +12,7 @@
  * to dynamically delegate and structure the behavior of encountering different animal types through the
  * AnimalBehavior event, enabling customizable behavior for each specific animal.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using JacobResilienceGame.Checkers;
 using Config;
@@ -28,6 +28,13 @@ namespace JacobResilienceGame.Animals
         protected readonly string EmojiCharacter; // Represents the emoji character associated with the animal
         protected readonly string Sound; // Represents the sound associated with encountering the animal
 
+        /// <summary>
+        /// Initializes a new instance of the DelegateAnimalChecker class.
+        /// </summary>
+        /// <param name="game">Instance of the Game class for accessing emojis and configurations.</param>
+        /// <param name="program">Instance of the Program class for interaction.</param>
+        /// <param name="emojiCharacter">Emoji character associated with the animal.</param>
+        /// <param name="sound">Sound associated with encountering the animal.</param>
         protected DelegateAnimalChecker(Game game, Program program, string emojiCharacter, string sound) : base(game, program)
         {
             EmojiCharacter = emojiCharacter;

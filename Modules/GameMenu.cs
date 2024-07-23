@@ -1,10 +1,13 @@
 /*
  * GameMenu.cs
- * @ Edoardo Sabatini & ChatGPT 3.5
- * -------------------------------------------
+ * Authors: Edoardo Sabatini & ChatGPT 3.5
+ * -------------------------------------------------------------
  * This class manages the game menu.
- * -------------------------------------------
- * @hacktlon July 15, 2024
+ * It provides functionality to display the menu, handle user input,
+ * and execute actions related to sound, archiving player state, 
+ * and toggling sound wave settings.
+ * -------------------------------------------------------------
+ * @Hackathon July 13th to 23rd, 2024
  */
 namespace Modules
 {

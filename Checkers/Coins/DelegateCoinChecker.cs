@@ -13,12 +13,12 @@
  * the behavior of encountering different coin types through the CoinBehavior event, enabling
  * customizable behavior for each specific coin.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using JacobResilienceGame.Checkers;
 using Config;
 
-namespace JacobResilienceGame.Coins // Plural namespace name
+namespace JacobResilienceGame.Coins
 {
     /// <summary>
     /// Abstract base class representing a coin behavior delegate in the game.

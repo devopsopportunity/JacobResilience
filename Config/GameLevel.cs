@@ -5,7 +5,7 @@
  * This file defines the GameLevel class that contains a dynamic array of CheckersConfig.
  * It also includes attributes for level and description.
  * -------------------------------------------------------------
- * @hacktlon July 18, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 
 namespace Config
@@ -17,7 +17,7 @@ namespace Config
 
         public int TotalScoreDuration { get; set; } // Total score duration for the level
 
-        public int PavementLevel  { get; set; } // Pavement for the level
+        public int PavementLevel { get; set; } // Pavement for the level
 
         // Default constructor
         public GameLevel(string description) {

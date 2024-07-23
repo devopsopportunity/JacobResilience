@@ -5,7 +5,7 @@
  * This file defines the game configuration constants.
  * Singleton class that contains game configuration constants.
  * -------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 namespace Config
 {
@@ -42,7 +42,7 @@ namespace Config
         /// </summary>
         public const string PLAY_BACK_WAIT_FOR_KEY = "wait_for_key";
 
-        public const int SCREEN_WIDTH_INTERVAL = 30;
+        public const int SCREEN_WIDTH_INTERVAL = 20;
 
         /// <summary>
         /// Initial X position of the player.

@@ -5,8 +5,11 @@
  * This file defines the CheckCoins2 class for checking coin type 2 in the Jacob's Resilience game.
  * It specializes the abstract DelegateCoinChecker class, implementing the CoinBehavior method
  * to specifically handle coin type 2 checks in accordance with the Liskov Substitution Principle (LSP).
+ * 
+ * This class inherits from DelegateCoinChecker to leverage the abstract behavior definition and
+ * dynamically assigned behavior via the CoinBehavior event.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Config;
 

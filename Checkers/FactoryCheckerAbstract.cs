@@ -6,7 +6,7 @@
  * for checking items in the Jacob's Resilience game. It serves
  * as a base class for different types of Item Checkers.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using Modules;
 using Config;
@@ -14,10 +14,12 @@ using Config;
 namespace JacobResilienceGame.Checkers
 {
     /// <summary>
-    /// Abstract base class using the Design Pattern Abstract Factory for checking items in the game.
-    /// It defines a common interface (CheckForItems method) that specific item checker classes must implement.
-    /// This pattern promotes code reusability, enhances maintainability, and adheres to SOLID principles
-    /// such as Open/Closed and Liskov Substitution Principle (LSP).
+    /// Abstract base class for item checkers in the Jacob's Resilience game.
+    /// Implements the Abstract Factory Design Pattern to provide a common interface
+    /// for checking items at specified coordinates. Derived classes will implement 
+    /// the specific checking logic for different types of items.
+    /// This pattern enhances code reusability and maintainability while adhering
+    /// to SOLID principles like the Open/Closed Principle and Liskov Substitution Principle (LSP).
     /// </summary>
     public abstract class FactoryCheckerAbstract
     {
@@ -25,6 +27,11 @@ namespace JacobResilienceGame.Checkers
         protected Program program; // Reference to the main Program instance for interaction
         protected readonly SoundPlayer soundPlayer; // Sound player instance for playing game sounds
 
+        /// <summary>
+        /// Initializes a new instance of the FactoryCheckerAbstract class.
+        /// </summary>
+        /// <param name="game">Instance of the Game class for accessing emojis and configurations.</param>
+        /// <param name="program">Instance of the Program class for interaction.</param>
         protected FactoryCheckerAbstract(Game game, Program program)
         {
             this.game = game;

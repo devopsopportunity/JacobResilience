@@ -4,7 +4,7 @@
  * -------------------------------------------
  * This class manages the emoji game.
  * -------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 using EmojiGame; // Assuming Emoji and EmojiDatabase classes are in this namespace
 

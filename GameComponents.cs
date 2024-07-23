@@ -7,7 +7,7 @@
  * the Jacob's Resilience game. It includes game initialization,
  * input handling, world updating, and screen drawing.
  * -------------------------------------------------------------
- * @hacktlon July 15, 2024
+ * @Hackathon July 13th to 23rd, 2024
  */
 
 using Config;
