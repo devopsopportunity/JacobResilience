@@ -29,6 +29,7 @@ namespace JacobResilienceGame.Energies
         {
             // Increase player's energy when an apple is collected
             program.lives++;
+            if(program.lives>GameConfig.MAX_LIVES) program.lives = GameConfig.MAX_LIVES;
         }
     }
 }

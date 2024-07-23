@@ -83,6 +83,7 @@ namespace JacobResilienceGame
             showMenu = false;
             offset = 0;
             score = 0;
+            levelScore = 0;
             credit = 0;
             credit2 = 0;
             resilience = GameConfig.INIT_RESILIENCE;

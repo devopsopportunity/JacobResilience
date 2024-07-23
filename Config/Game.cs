@@ -43,6 +43,9 @@ namespace Config
         private string snake1EmojiChar;
         private string snake2EmojiChar;      
         private string watermelonEmojiChar;
+        private string magicPotionEmojiChar;
+        private string diamondEmojiChar;
+        private string zebraEmojiChar;
 
         /// <summary>
         /// Initializes a new instance of the Game class.
@@ -69,7 +72,7 @@ namespace Config
             coin2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_2")?.Character ?? " ";
             coin3EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Coin_3")?.Character ?? " ";
             poachersEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Poachers")?.Character ?? " ";
-            staminaEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Shield")?.Character ?? " ";
+            staminaEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Stamina")?.Character ?? " ";
             livesEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Health")?.Character ?? " ";
             hippopotamusEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Hippopotamus")?.Character ?? " ";
             crocodileEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Crocodile")?.Character ?? " ";
@@ -82,6 +85,9 @@ namespace Config
             snake1EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake1")?.Character ?? " ";
             snake2EmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Snake2")?.Character ?? " ";
             watermelonEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Watermelon")?.Character ?? " ";
+            magicPotionEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "MagicPotion")?.Character ?? " ";
+            diamondEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Diamond")?.Character ?? " ";
+            zebraEmojiChar = emojiDatabase.Emojis.Find(e => e.Name == "Zebra")?.Character ?? " ";
 
             pavementLevel = new string[10];
             buildPavementLevel(emojiDatabase);
@@ -130,6 +136,9 @@ namespace Config
         public string DangerEmojiChar => dangerEmojiChar;
         public string Snake1EmojiChar => snake1EmojiChar;
         public string Snake2EmojiChar => snake2EmojiChar;
-        public string WatermelonEmojiChar => watermelonEmojiChar;
+        public string WatermelonEmojiChar => watermelonEmojiChar;        
+        public string MagicPotionEmojiChar => magicPotionEmojiChar;
+        public string DiamondEmojiChar => diamondEmojiChar;
+        public string ZebraEmojiChar => zebraEmojiChar;
     }
 }

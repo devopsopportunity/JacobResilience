@@ -54,21 +54,32 @@ namespace Config
         {
             emojiMap = new Dictionary<string, string>()
             {
+                // Animals
                 {"hippo", game.HippopotamusEmojiChar},
                 {"crocodile", game.CrocodileEmojiChar},
                 {"snake1", game.Snake1EmojiChar},
                 {"snake2", game.Snake2EmojiChar},
+                {"zebra", game.ZebraEmojiChar},
+
+                // Coins
                 {"coin1", game.Coin1EmojiChar},
                 {"coin2", game.Coin2EmojiChar},
                 {"coin3", game.Coin3EmojiChar},
+                {"diamond", game.DiamondEmojiChar},
+
+                // Enemies
                 {"danger", game.DangerEmojiChar},
                 {"fire", game.FireEmojiChar},
-                {"poacher", game.PoachersEmojiChar},
+                {"poachers", game.PoachersEmojiChar},
                 {"trap", game.TrapEmojiChar},
+
+                // Energies
                 {"apple", game.AppleEmojiChar},
                 {"energy", game.EnergyEmojiChar},
+                {"magicpotion", game.MagicPotionEmojiChar},
                 {"meat1", game.Meat1EmojiChar},
-                {"meat2", game.Meat2EmojiChar}
+                {"meat2", game.Meat2EmojiChar},
+                {"watermelon", game.WatermelonEmojiChar}
             };
         }
 
@@ -143,15 +154,9 @@ namespace Config
                                                 checkersConfig.MaxEntities = int.Parse(value);
                                                 break;
                                             case "MIN_H":
-                                                if(value.Equals("H - 1")) 
-                                                    checkersConfig.MinHeight = GameConfig.SCREEN_HEIGHT - 1;
-                                                else     
                                                 checkersConfig.MinHeight = ParseHeight(value);
                                                 break;
                                             case "MAX_H":
-                                                if(value.Equals("H - 1")) 
-                                                    checkersConfig.MaxHeight = GameConfig.SCREEN_HEIGHT - 1;
-                                                else
                                                 checkersConfig.MaxHeight = ParseHeight(value);
                                                 break;
                                         }
@@ -202,24 +207,33 @@ namespace Config
         /// <returns>Parsed integer height value.</returns>
         private int ParseHeight(string value)
         {
-            return value.Contains("H") ? ParseGameConfigValue(value) : int.Parse(value);
-        }
+            int baseValue = GameConfig.SCREEN_HEIGHT;
+            int parsedHeight;
 
-        /// <summary>
-        /// Parses the game configuration value from the specified string.
-        /// </summary>
-        /// <param name="value">String containing the game configuration expression.</param>
-        /// <returns>Parsed integer value based on the game configuration.</returns>
-        private int ParseGameConfigValue(string value)
-        {
-            var parts = value.Split(new[] { '/', '*' }, StringSplitOptions.RemoveEmptyEntries);
-            int baseValue = value.Contains("H") ? GameConfig.SCREEN_HEIGHT : 0;
-            if (parts.Length == 2)
+            if (value.Contains("H -"))
             {
-                int multiplier = int.Parse(parts[1].Trim());
-                return baseValue / multiplier;
+                parsedHeight = baseValue - int.Parse(value.Split('-')[1].Trim());
             }
-            return baseValue;
+            else if (value.Contains("/"))
+            {
+                parsedHeight = baseValue / int.Parse(value.Split('/')[1].Trim());
+            }
+            else if (value.Contains("H"))
+            {
+                parsedHeight = baseValue;
+            }
+            else
+            {
+                parsedHeight = int.Parse(value);
+            }
+
+            // Ensure the parsed height is within the valid range (5 to H - 1)
+            if (parsedHeight < 5 || parsedHeight >= baseValue)
+            {
+                parsedHeight = baseValue - 1; // H corresponds to the ground
+            }
+
+            return parsedHeight;
         }
 
         /// <summary>

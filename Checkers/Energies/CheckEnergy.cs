@@ -29,6 +29,7 @@ namespace JacobResilienceGame.Energies
         {
             // Increase player's resilience when the generic energy item is collected
             program.resilience++;
+            if(program.resilience>GameConfig.MAX_RESILIENCE) program.resilience = GameConfig.MAX_RESILIENCE;
         }
     }
 }

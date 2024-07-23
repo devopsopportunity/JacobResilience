@@ -1,17 +1,119 @@
 LEVEL_DESCRIPTION: You are now in the Savannah! You'll face poachers' traps that attempt to reduce your health.
-TOTAL_SCORE_DURATION: 5
+TOTAL_SCORE_DURATION: 30
 PAVEMENT: 6
-ENTITY: danger
-SCORE_INTERVAL: [1, 5]
-MIN_E: 2
+ENTITY: hippo
+SCORE_INTERVAL: [1, 2]
+MIN_E: 1
 MAX_E: 5
 MIN_H: H - 1
 MAX_H: H - 1
-ENTITY: hippo
-SCORE_INTERVAL: [2, 4], [6, 8], [11, 13]
-MIN_E: 2
+ENTITY: crocodile
+SCORE_INTERVAL: [2, 3]
+MIN_E: 1
 MAX_E: 5
-MIN_H: H / 3
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: snake1
+SCORE_INTERVAL: [3, 4]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: snake2
+SCORE_INTERVAL: [4, 5]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: zebra
+SCORE_INTERVAL: [6, 7]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: coin1
+SCORE_INTERVAL: [7, 8]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: coin2
+SCORE_INTERVAL: [8, 9]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: coin3
+SCORE_INTERVAL: [10,11]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: diamond
+SCORE_INTERVAL: [12, 13]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: danger
+SCORE_INTERVAL: [14, 15]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: fire
+SCORE_INTERVAL: [16, 17]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: poachers
+SCORE_INTERVAL: [17, 18]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: trap
+SCORE_INTERVAL: [18, 19]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: apple
+SCORE_INTERVAL: [20, 21]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: energy
+SCORE_INTERVAL: [22, 23]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: magicpotion
+SCORE_INTERVAL: [23, 24]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: meat1
+SCORE_INTERVAL: [24, 25]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: meat2
+SCORE_INTERVAL: [25, 26]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: watermelon
+SCORE_INTERVAL: [27, 28]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
 MAX_H: H - 1
 LEVEL_DESCRIPTION: Now you are swimming through the Kazinga Channel for almost a mile and encountering hippos along your path! They reduce your resilience by one point.
 TOTAL_SCORE_DURATION: 5

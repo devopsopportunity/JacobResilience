@@ -29,7 +29,9 @@ namespace JacobResilienceGame.Energies
         {
             // Increase player's stamina and resilience when Meat_2 is collected
             program.stamina++;
+            if(program.stamina>GameConfig.MAX_STAMINA) program.stamina = GameConfig.MAX_STAMINA;
             program.resilience++;
+            if(program.resilience>GameConfig.MAX_RESILIENCE) program.resilience = GameConfig.MAX_RESILIENCE;
         }
     }
 }
