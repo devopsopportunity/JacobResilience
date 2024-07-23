@@ -8,11 +8,14 @@
 # screen, runs the .NET application, and restores the normal cursor
 # after the application exits.
 # -------------------------------------------------------------
-# @hacktlon July 15, 2024
+# @Hackathon July 13th to 23rd, 2024
 # -------------------------------------------------------------
 
+export SCREEN_HEIGHT=40
+export SCREEN_WIDTH=106
+
 # Resize the terminal to 40 rows and 106 columns
-resize -s 40 106
+resize -s $SCREEN_HEIGHT $SCREEN_WIDTH
 
 # Clear the terminal screen
 clear

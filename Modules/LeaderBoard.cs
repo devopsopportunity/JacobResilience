@@ -372,7 +372,7 @@ namespace Modules
             }
             else
             {
-                Console.WriteLine("Player status file not found. Starting a new game.");
+                // Console.WriteLine("Player status file not found. Starting a new game.");
             }
         }
     } // end class

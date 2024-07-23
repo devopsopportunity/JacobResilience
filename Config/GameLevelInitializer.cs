@@ -7,9 +7,6 @@
  * -------------------------------------------------------------
  * @hacktlon July 15, 2024
  */
-
-using System.Globalization;
-
 namespace Config
 {
     public class GameLevelInitializer
@@ -20,7 +17,7 @@ namespace Config
         private Dictionary<string, string> emojiMap;
         private Game game;
 
-      /// <summary>
+        /// <summary>
         /// Constructor to initialize GameLevelInitializer with a game instance.
         /// </summary>
         /// <param name="game">Game instance providing emoji characters.</param>
@@ -41,8 +38,12 @@ namespace Config
                 Environment.Exit(1);
             }
 
+            // Sort files alphabetically
+            Array.Sort(files);
+
             foreach (string filePath in files)
             {
+                // Console.WriteLine("LOADING FILE LEVEL: " + filePath);
                 LoadGameLevelsFromFile(filePath);
             }
         }
@@ -207,7 +208,7 @@ namespace Config
         /// <returns>Parsed integer height value.</returns>
         private int ParseHeight(string value)
         {
-            int baseValue = GameConfig.SCREEN_HEIGHT;
+            int baseValue = GameConfig.Instance.SCREEN_HEIGHT;
             int parsedHeight;
 
             if (value.Contains("H -"))

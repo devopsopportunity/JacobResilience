@@ -3,17 +3,17 @@
  * @ Edoardo Sabatini & ChatGPT 3.5
  * -------------------------------------------
  * This file defines the game configuration constants.
+ * Singleton class that contains game configuration constants.
  * -------------------------------------------
  * @hacktlon July 15, 2024
  */
 namespace Config
 {
     /// <summary>
-    /// Static class that contains game configuration constants.
+    /// Singleton class that contains game configuration constants.
     /// </summary>
-    public static class GameConfig
+    public sealed class GameConfig
     {
-
         // File paths for leaderboard and player status
         public const string PLAYER_STATUS_FILE = "playerStatus.txt";
 
@@ -42,15 +42,7 @@ namespace Config
         /// </summary>
         public const string PLAY_BACK_WAIT_FOR_KEY = "wait_for_key";
 
-        /// <summary>
-        /// Width of the game screen.
-        /// </summary>
-        public const int SCREEN_WIDTH = 100;
-
-        /// <summary>
-        /// Height of the game screen.
-        /// </summary>
-        public const int SCREEN_HEIGHT = 25;
+        public const int SCREEN_WIDTH_INTERVAL = 30;
 
         /// <summary>
         /// Initial X position of the player.
@@ -78,6 +70,7 @@ namespace Config
         public const int MAX_RESILIENCE = 30;
 
         public const int INIT_RESILIENCE = 3;
+
         /// <summary>
         /// Initial stamina of the player.
         /// </summary>
@@ -93,5 +86,42 @@ namespace Config
 
         public const int STEP_LEVELS = 3;
 
+        private const int DefaultScreenWidth = 106;
+        private const int DefaultScreenHeight = 40;
+
+        private const int DeltaScreenWidth = 6;
+        private const int DeltatScreenHeight = 15;
+
+        /// <summary>
+        /// Width of the game screen.
+        /// </summary>
+        public int SCREEN_WIDTH { get; private set; }
+
+        /// <summary>
+        /// Height of the game screen.
+        /// </summary>
+        public int SCREEN_HEIGHT { get; private set; }
+
+        // The singleton instance
+        private static readonly Lazy<GameConfig> instance = new Lazy<GameConfig>(() => new GameConfig());
+
+        /// <summary>
+        /// Private constructor to prevent external instantiation.
+        /// </summary>
+        private GameConfig()
+        {
+            // Read environment variables
+            string? widthEnv = Environment.GetEnvironmentVariable("SCREEN_WIDTH");
+            string? heightEnv = Environment.GetEnvironmentVariable("SCREEN_HEIGHT");
+
+            // Set SCREEN_WIDTH and SCREEN_HEIGHT with environment variables if available, otherwise use default values
+            SCREEN_WIDTH = (int.TryParse(widthEnv, out int width) ? width : DefaultScreenWidth) - DeltaScreenWidth;
+            SCREEN_HEIGHT = (int.TryParse(heightEnv, out int height) ? height : DefaultScreenHeight) - DeltatScreenHeight;
+        }
+
+        /// <summary>
+        /// Gets the singleton instance of the GameConfig class.
+        /// </summary>
+        public static GameConfig Instance => instance.Value;
     }
 }

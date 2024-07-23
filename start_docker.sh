@@ -10,14 +10,17 @@
 # Docker container interactively (removing it when it exits), and
 # finally restores the normal cursor and lists Docker images.
 # -------------------------------------------------------------
-# @hacktlon July 15, 2024
+# @Hackathon July 13th to 23rd, 2024
 # -------------------------------------------------------------
+
+export SCREEN_HEIGHT=40
+export SCREEN_WIDTH=106
 
 # Build the Docker image named 'jacob-resilience' using the Dockerfile in the current directory
 docker build -t jacob-resilience -f Dockerfile .
 
 # Resize the terminal to 40 rows and 106 columns
-resize -s 40 106
+resize -s $SCREEN_HEIGHT $SCREEN_WIDTH
 
 # Clear the terminal screen
 clear

@@ -68,7 +68,7 @@ namespace Modules
             int digits = program.levels / 10;
 
             string levelText = $"LEVEL {currentLevel}";
-            int screenWidth = GameConfig.SCREEN_WIDTH;
+            int screenWidth = GameConfig.Instance.SCREEN_WIDTH;
 
             // Print the level title
             Console.Write(levelText);

@@ -23,8 +23,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 4,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.HippopotamusEmojiChar
             };
 
@@ -33,8 +33,8 @@ namespace Config
             {
                 MinEntities = 2,
                 MaxEntities = 5,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.CrocodileEmojiChar
             };
 
@@ -43,8 +43,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 2,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Snake1EmojiChar
             };
 
@@ -53,8 +53,8 @@ namespace Config
             {
                 MinEntities = 0,
                 MaxEntities = 1,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Snake2EmojiChar
             };
 
@@ -64,8 +64,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 4,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Coin1EmojiChar
             };
 
@@ -74,8 +74,8 @@ namespace Config
             {
                 MinEntities = 0,
                 MaxEntities = 1,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Coin2EmojiChar
             };
 
@@ -84,8 +84,8 @@ namespace Config
             {
                 MinEntities = 0,
                 MaxEntities = 2,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Coin3EmojiChar
             };
 
@@ -95,8 +95,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 2,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.DangerEmojiChar
             };
 
@@ -105,8 +105,8 @@ namespace Config
             {
                 MinEntities = 2,
                 MaxEntities = 3,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.FireEmojiChar
             };
 
@@ -115,8 +115,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 4,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.PoachersEmojiChar
             };
 
@@ -125,8 +125,8 @@ namespace Config
             {
                 MinEntities = 2,
                 MaxEntities = 5,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.TrapEmojiChar
             };
 
@@ -136,8 +136,8 @@ namespace Config
             {
                 MinEntities = 3,
                 MaxEntities = 4,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.AppleEmojiChar
             };
 
@@ -146,8 +146,8 @@ namespace Config
             {
                 MinEntities = 2,
                 MaxEntities = 3,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.EnergyEmojiChar
             };
 
@@ -156,8 +156,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 2,
-                MinHeight = GameConfig.SCREEN_HEIGHT - 1,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Meat1EmojiChar
             };
 
@@ -166,8 +166,8 @@ namespace Config
             {
                 MinEntities = 1,
                 MaxEntities = 3,
-                MinHeight = GameConfig.SCREEN_HEIGHT / 2,
-                MaxHeight = GameConfig.SCREEN_HEIGHT - 1,
+                MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2,
+                MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1,
                 Character = game.Meat2EmojiChar
             };
 

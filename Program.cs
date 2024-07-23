@@ -64,13 +64,10 @@ namespace JacobResilienceGame
             // Initialize game components
             gameMenu = new GameMenu(); 
             game = new Game();
-            screen = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
-            screenBackup = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
+            screen = new string[GameConfig.Instance.SCREEN_HEIGHT, GameConfig.Instance.SCREEN_WIDTH];
+            screenBackup = new string[GameConfig.Instance.SCREEN_HEIGHT, GameConfig.Instance.SCREEN_WIDTH];
             gameComponents = new GameComponents(game, this);
             gameLevelInitializer = new GameLevelInitializer(game);
-            // gameLevelInitializer.Verify();
-            // Console.WriteLine("levels="+gameLevelInitializer.GameLevels.Count());
-            // Environment.Exit(1);
             leaderBoard.ReadFromFile();
             InitializeGame();
         }
@@ -159,7 +156,7 @@ namespace JacobResilienceGame
                     }
                     else
                     {
-                        gameMenu.ShowMenu(GameConfig.SCREEN_HEIGHT + 1, GameConfig.SCREEN_WIDTH,
+                        gameMenu.ShowMenu(GameConfig.Instance.SCREEN_HEIGHT + 1, GameConfig.Instance.SCREEN_WIDTH,
                             ReturnToGame, ExitGame, ToggleSound, ArchivePlayer, ToggleWave);
                     }
 
@@ -200,9 +197,9 @@ namespace JacobResilienceGame
                 while (inputQueue.Count > 0)
                 {
                     var key = inputQueue.Dequeue();
-                    if (key.Key == ConsoleKey.UpArrow && playerPosY == GameConfig.SCREEN_HEIGHT - 1)
+                    if (key.Key == ConsoleKey.UpArrow && playerPosY == GameConfig.Instance.SCREEN_HEIGHT - 1)
                         jumpVelocity = GameConfig.START_JUMP_VELOCITY;
-                    else if (key.Key == ConsoleKey.RightArrow && playerPosX < GameConfig.SCREEN_WIDTH - 5)
+                    else if (key.Key == ConsoleKey.RightArrow && playerPosX < GameConfig.Instance.SCREEN_WIDTH - 5)
                         playerPosX++;
                     else if (key.Key == ConsoleKey.LeftArrow && playerPosX > 0)
                         playerPosX--;
@@ -315,19 +312,19 @@ namespace JacobResilienceGame
         /// </summary>
         private void InitializeWorld()
         {
-            screen = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
-            screenBackup = new string[GameConfig.SCREEN_HEIGHT, GameConfig.SCREEN_WIDTH];
+            screen = new string[GameConfig.Instance.SCREEN_HEIGHT, GameConfig.Instance.SCREEN_WIDTH];
+            screenBackup = new string[GameConfig.Instance.SCREEN_HEIGHT, GameConfig.Instance.SCREEN_WIDTH];
 
             // Initialize the screen with the background and initial positions
-            for (int y = 0; y < GameConfig.SCREEN_HEIGHT; y++)
+            for (int y = 0; y < GameConfig.Instance.SCREEN_HEIGHT; y++)
             {
-                for (int x = 0; x < GameConfig.SCREEN_WIDTH; x++)
+                for (int x = 0; x < GameConfig.Instance.SCREEN_WIDTH; x++)
                 {
-                    if (x == GameConfig.SCREEN_WIDTH - 1 && y == 1)
+                    if (x == GameConfig.Instance.SCREEN_WIDTH - 1 && y == 1)
                         screen[y, x] = game.CloudsunEmojiChar;
-                    else if (x == GameConfig.SCREEN_WIDTH - 3 && y == 1)
+                    else if (x == GameConfig.Instance.SCREEN_WIDTH - 3 && y == 1)
                         screen[y, x] = game.RainbowEmojiChar;
-                    else if (y == 2 && x % 6 == 0 && !((x == GameConfig.SCREEN_WIDTH - 1) && (x == GameConfig.SCREEN_WIDTH - 2)))
+                    else if (y == 2 && x % 6 == 0 && !((x == GameConfig.Instance.SCREEN_WIDTH - 1) && (x == GameConfig.Instance.SCREEN_WIDTH - 2)))
                         screen[y, x] = game.CloudEmojiChar;
                     else if (y == 3 && x % 5 == 0 && !(x % 7 == 0))
                         screen[y, x] = game.CloudEmojiChar;
@@ -352,11 +349,11 @@ namespace JacobResilienceGame
 
             utility.PrintLevelTitle();
 
-            for (int y = 0; y < GameConfig.SCREEN_HEIGHT; y++)
+            for (int y = 0; y < GameConfig.Instance.SCREEN_HEIGHT; y++)
             {
-                for (int x = 0; x < GameConfig.SCREEN_WIDTH; x++)
+                for (int x = 0; x < GameConfig.Instance.SCREEN_WIDTH; x++)
                 {
-                    int adjustedX = (x + offset) % GameConfig.SCREEN_WIDTH;
+                    int adjustedX = (x + offset) % GameConfig.Instance.SCREEN_WIDTH;
                     if (x == playerPosX && y == playerPosY)
                     {
                         Console.Write("\b" + game.PlayerEmojiChar);
@@ -376,7 +373,7 @@ namespace JacobResilienceGame
             var gameLevel = gameLevelInitializer.GameLevels[levels];
             string pavementLevel = gameLevel.PavementLevel<0 || gameLevel.PavementLevel>=game.PavementLevel.Length ? game.PavementLevel[levels%10] : game.PavementLevel[gameLevel.PavementLevel];
 
-            for (int x = 0; x < GameConfig.SCREEN_WIDTH / 2; x++) Console.Write(pavementLevel);
+            for (int x = 0; x < GameConfig.Instance.SCREEN_WIDTH / 2; x++) Console.Write(pavementLevel);
 
             Console.WriteLine("\nPress 'M' = Show Menu, 'R' = Restart Game");
             Console.WriteLine($"Score: {score}");
@@ -407,7 +404,7 @@ namespace JacobResilienceGame
         /// <returns>True if the player can move to the position, false otherwise.</returns>
         private bool CanMoveTo(int x, int y)
         {
-            if (y < 0 || y >= GameConfig.SCREEN_HEIGHT) return false;
+            if (y < 0 || y >= GameConfig.Instance.SCREEN_HEIGHT) return false;
             // int adjustedX = (x + offset) % GameConfig.SCREEN_WIDTH;
             // return screen[y, adjustedX] != game.WallEmojiChar;
             return true;
@@ -421,10 +418,10 @@ namespace JacobResilienceGame
             int oldPlayerPosY = playerPosY;
 
             // Player jump handling
-            if (jumpVelocity > 0 || playerPosY < GameConfig.SCREEN_HEIGHT - 1)
+            if (jumpVelocity > 0 || playerPosY < GameConfig.Instance.SCREEN_HEIGHT - 1)
             {
                 int newY = playerPosY - jumpVelocity;
-                newY = Math.Max(0, Math.Min(newY, GameConfig.SCREEN_HEIGHT - 1));
+                newY = Math.Max(0, Math.Min(newY, GameConfig.Instance.SCREEN_HEIGHT - 1));
 
                 for (int y = Math.Min(oldPlayerPosY, newY); y <= Math.Max(oldPlayerPosY, newY); y++)
                 {
@@ -444,7 +441,7 @@ namespace JacobResilienceGame
             }
 
             // Applying gravity
-            if (playerPosY < GameConfig.SCREEN_HEIGHT - 1)
+            if (playerPosY < GameConfig.Instance.SCREEN_HEIGHT - 1)
             {
                 int newY = playerPosY + 1;
                 if (CanMoveTo(playerPosX, newY))
@@ -456,7 +453,7 @@ namespace JacobResilienceGame
 
             // Screen scrolling
             offset++;
-            if (offset >= GameConfig.SCREEN_WIDTH)
+            if (offset >= GameConfig.Instance.SCREEN_WIDTH)
             {
                 restoreScreen();
                 
@@ -464,7 +461,7 @@ namespace JacobResilienceGame
                 score++;
                 levelScore++;
 
-                if (levels < gameLevelInitializer.GameLevels.Count-1) {
+                if (levels < gameLevelInitializer.GameLevels.Count) {
                     var gameLevel = gameLevelInitializer.GameLevels[levels];
                     // You can now use `gameLevel` as needed
 
@@ -512,9 +509,9 @@ namespace JacobResilienceGame
         /// </summary>
         private void restoreScreen()
         {
-            for (int y = 0; y < GameConfig.SCREEN_HEIGHT; y++)
+            for (int y = 0; y < GameConfig.Instance.SCREEN_HEIGHT; y++)
             {
-                for (int x = 0; x < GameConfig.SCREEN_WIDTH; x++)
+                for (int x = 0; x < GameConfig.Instance.SCREEN_WIDTH; x++)
                 {
                     screen[y, x] = screenBackup[y, x];
                 }
@@ -536,7 +533,7 @@ namespace JacobResilienceGame
 
             for (int i = 0; i < numEntities; i++)
             {
-                int entityX = random.Next(GameConfig.SCREEN_WIDTH - 7, GameConfig.SCREEN_WIDTH - 1);
+                int entityX = random.Next(GameConfig.Instance.SCREEN_WIDTH - GameConfig.SCREEN_WIDTH_INTERVAL, GameConfig.Instance.SCREEN_WIDTH - 1);
                 int entityY = random.Next(minHeight, maxHeight);
 
                 screen[entityY, entityX] = emojiChar;

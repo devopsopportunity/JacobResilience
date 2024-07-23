@@ -60,8 +60,8 @@ namespace Config
             // Default values
             MinEntities = 0;
             MaxEntities = 1;
-            MinHeight = GameConfig.SCREEN_HEIGHT / 2;
-            MaxHeight = GameConfig.SCREEN_HEIGHT - 1;
+            MinHeight = GameConfig.Instance.SCREEN_HEIGHT / 2;
+            MaxHeight = GameConfig.Instance.SCREEN_HEIGHT - 1;
 
             // Initialize the list of score intervals
             ScoreIntervals = new List<ScoreInterval>();

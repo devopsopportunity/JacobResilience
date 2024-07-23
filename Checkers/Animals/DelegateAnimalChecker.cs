@@ -42,9 +42,9 @@ namespace JacobResilienceGame.Animals
         /// <param name="x">X coordinate to check.</param>
         public override async Task CheckForItems(int y, int x)
         {
-            int adjustedX = (x + program.offset) % GameConfig.SCREEN_WIDTH;
+            int adjustedX = (x + program.offset) % GameConfig.Instance.SCREEN_WIDTH;
 
-            if (adjustedX >= 0 && adjustedX < GameConfig.SCREEN_WIDTH && y >= 0 && y < GameConfig.SCREEN_HEIGHT 
+            if (adjustedX >= 0 && adjustedX < GameConfig.Instance.SCREEN_WIDTH && y >= 0 && y < GameConfig.Instance.SCREEN_HEIGHT 
                 && program.screen[y, adjustedX] == EmojiCharacter)
             {
                 program.screen[y, adjustedX] = " ";

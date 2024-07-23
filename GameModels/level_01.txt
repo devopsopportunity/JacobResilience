@@ -1,0 +1,45 @@
+LEVEL_DESCRIPTION: Now you are swimming through the Kazinga Channel for almost a mile and encountering hippos along your path! They reduce your resilience by one point.
+TOTAL_SCORE_DURATION: 12
+PAVEMENT: AUTO
+ENTITY: coin1
+SCORE_INTERVAL: [0, 10]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: coin2
+SCORE_INTERVAL: [0, 10]
+MIN_E: 1
+MAX_E: 1
+MIN_H: H / 3
+MAX_H: H - 1
+ENTITY: danger
+SCORE_INTERVAL: [2, 4], [6, 8]
+MIN_E: 1
+MAX_E: 3
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: hippo
+SCORE_INTERVAL: [1, 2], [5, 7], [9, 10]
+MIN_E: 1
+MAX_E: 3
+MIN_H: H - 3
+MAX_H: H - 1
+ENTITY: apple
+SCORE_INTERVAL: [2, 2], [7, 7], [10, 10]
+MIN_E: 1
+MAX_E: 1
+MIN_H: H / 3
+MAX_H: H - 1
+ENTITY: energy
+SCORE_INTERVAL: [0, 2], [4, 5]
+MIN_E: 1
+MAX_E: 1
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: meat1
+SCORE_INTERVAL: [3, 4], [8, 10]
+MIN_E: 1
+MAX_E: 2
+MIN_H: H / 3
+MAX_H: H - 1

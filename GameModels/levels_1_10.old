@@ -1,0 +1,63 @@
+LEVEL_DESCRIPTION: In this level, you enter the dense jungle filled with dangerous plants and animals. Beware of hazards that might reduce your health!
+TOTAL_SCORE_DURATION: 20
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [3, 13]
+MIN_E: 0
+MAX_E: 4
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You have reached the high cliffs overlooking the Kazinga Channel. Watch for falling rocks and sudden drops that might affect your health.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: apple
+SCORE_INTERVAL: [2, 4], [6, 9], [11, 14]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now in the deep forest where you encounter wild animals and treacherous paths. Keep your health and stamina in check!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: hippo
+SCORE_INTERVAL: [1, 4], [5, 8], [9, 12]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: This level takes you to the treacherous swamp area filled with quicksand and venomous creatures. Stay alert and manage your resources carefully.
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: danger
+SCORE_INTERVAL: [3, 6], [7, 10], [13, 16]
+MIN_E: 3
+MAX_E: 6
+MIN_H: H / 4
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now in the deep forest where you encounter wild animals and treacherous paths. Keep your health and stamina in check!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: hippo
+SCORE_INTERVAL: [1, 4], [5, 8], [9, 12]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now in the deep forest where you encounter wild animals and treacherous paths. Keep your health and stamina in check!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: hippo
+SCORE_INTERVAL: [1, 4], [5, 8], [9, 12]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2
+LEVEL_DESCRIPTION: You are now in the deep forest where you encounter wild animals and treacherous paths. Keep your health and stamina in check!
+TOTAL_SCORE_DURATION: 1
+PAVEMENT: AUTO
+ENTITY: hippo
+SCORE_INTERVAL: [1, 4], [5, 8], [9, 12]
+MIN_E: 2
+MAX_E: 5
+MIN_H: H / 3
+MAX_H: H - 2

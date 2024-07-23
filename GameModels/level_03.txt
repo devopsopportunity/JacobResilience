@@ -1,0 +1,57 @@
+LEVEL_DESCRIPTION: In this level, you enter the dense jungle filled with dangerous plants and animals. Beware of hazards that might reduce your health!
+TOTAL_SCORE_DURATION: 20
+PAVEMENT: 7
+ENTITY: coin1
+SCORE_INTERVAL: [0, 20]
+MIN_E: 1
+MAX_E: 5
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: coin2
+SCORE_INTERVAL: [5, 15]
+MIN_E: 1
+MAX_E: 1
+MIN_H: H / 3
+MAX_H: H - 1
+ENTITY: coin3
+SCORE_INTERVAL: [10, 20]
+MIN_E: 1
+MAX_E: 1
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: danger
+SCORE_INTERVAL: [3, 13]
+MIN_E: 0
+MAX_E: 4
+MIN_H: H / 3
+MAX_H: H - 2
+ENTITY: snake1
+SCORE_INTERVAL: [1, 10]
+MIN_E: 1
+MAX_E: 2
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: snake2
+SCORE_INTERVAL: [11, 20]
+MIN_E: 1
+MAX_E: 2
+MIN_H: H - 1
+MAX_H: H - 1
+ENTITY: apple
+SCORE_INTERVAL: [1, 2], [7, 7], [10, 11], [15, 20]
+MIN_E: 1
+MAX_E: 2
+MIN_H: H / 4
+MAX_H: H - 1
+ENTITY: energy
+SCORE_INTERVAL: [0, 2], [4, 5], [10, 15] 
+MIN_E: 1
+MAX_E: 1
+MIN_H: H / 2
+MAX_H: H - 1
+ENTITY: meat1
+SCORE_INTERVAL: [3, 4], [8, 10], [12, 18]
+MIN_E: 1
+MAX_E: 2
+MIN_H: H / 3
+MAX_H: H - 1
