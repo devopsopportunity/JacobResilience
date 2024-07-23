@@ -3,6 +3,12 @@
 Greetings of today!!! 😊 
 This hot summer has inspired me to create this C# .NET 8 game, based on the true story of Jacob, the lion king of the Kazinga Channel.
 
+## GamePlay Demo
+
+[Download and watch the gameplay video](GamePlay.webm)
+
+> Note: If you have trouble playing the video, we recommend using [VLC media player](https://www.videolan.org/vlc/).
+
 ## Overview
 
 Jacob's Resilience is a C# .NET 8 game that takes inspiration from the true story of Jacob, the lion king of the Kazinga Channel in Uganda. This game encapsulates Jacob's daring journey across treacherous waters, facing challenges such as crocodiles hippos and poachers' traps, symbolizing his resilience in the face of adversity, all with emojis.
